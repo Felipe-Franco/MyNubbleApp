@@ -7,5 +7,3 @@ export const api = axios.create({
       'Bearer MQ.YuhK4MHke8Daqga9Oqj4jwhRL8MKQ3FIJ4rIVTGzcJ1xO4cY-j5A_m23m0OZ',
   },
 })
-
-

@@ -23,7 +23,12 @@ export function HomeEmpty({ loading, error, refetch }: HomeEmptyProps) {
         <Text preset='paragraphMedium' bold={true}>
           Não foi possível carregar o feed 😢
         </Text>
-        <Button title='Recarregar' preset='outline' onPress={refetch} marginTop='s12'/>
+        <Button
+          title='Recarregar'
+          preset='outline'
+          onPress={refetch}
+          marginTop='s12'
+        />
       </>
     )
   }

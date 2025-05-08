@@ -1,51 +1,51 @@
-import {differenceInSeconds, format, parseISO} from 'date-fns';
+import { differenceInSeconds, format, parseISO } from 'date-fns'
 
 const formatRelative = (dateISO: string): string => {
-  const date = parseISO(dateISO);
-  const now = Date.now();
+  const date = parseISO(dateISO)
+  const now = Date.now()
 
-  const diffInSeconds = differenceInSeconds(now, date);
+  const diffInSeconds = differenceInSeconds(now, date)
 
   if (diffInSeconds < 0) {
-    return format(date, 'dd/MM/yyyy');
+    return format(date, 'dd/MM/yyyy')
   }
 
   if (diffInSeconds < 60) {
-    return `${diffInSeconds} s`;
+    return `${diffInSeconds} s`
   }
 
-  const diffInMinutes = Math.round(diffInSeconds / 60);
+  const diffInMinutes = Math.round(diffInSeconds / 60)
 
   if (diffInMinutes < 60) {
-    return `${diffInMinutes} m`;
+    return `${diffInMinutes} m`
   }
 
-  const diffInHours = Math.floor(diffInMinutes / 60);
+  const diffInHours = Math.floor(diffInMinutes / 60)
 
   if (diffInHours < 24) {
-    return `${diffInHours} h`;
+    return `${diffInHours} h`
   }
 
-  const diffInDays = Math.floor(diffInHours / 24);
+  const diffInDays = Math.floor(diffInHours / 24)
 
   if (diffInDays < 7) {
-    return `${diffInDays} d`;
+    return `${diffInDays} d`
   }
 
-  const diffInWeeks = Math.floor(diffInDays / 7);
+  const diffInWeeks = Math.floor(diffInDays / 7)
 
   if (diffInWeeks < 4) {
-    return `${diffInWeeks} sem`;
+    return `${diffInWeeks} sem`
   }
 
-  const diffInMonths = Math.floor(diffInDays / 30);
+  const diffInMonths = Math.floor(diffInDays / 30)
   if (diffInMonths < 12) {
-    return `${diffInMonths} mes`;
+    return `${diffInMonths} mes`
   }
 
-  return format(date, 'dd/MM/yyyy');
-};
+  return format(date, 'dd/MM/yyyy')
+}
 
 export const dateUtils = {
   formatRelative,
-};
+}

@@ -15,6 +15,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width,
     height: 300,
     marginHorizontal: -24,
-    marginTop: 12
+    marginTop: 12,
   },
 })
