@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useForm } from 'react-hook-form'
 
 import {
@@ -9,16 +8,13 @@ import {
   Screen,
   Text,
 } from '@components'
-import { RootStackParamList } from '@routes'
+import { AuthScreenProps } from '@routes'
 
-import { signUpSchema, SignUpSchema } from './signUpSchema'
+import { SignUpSchema, signUpSchema } from './signUpSchema'
 
-type SignUpScreenProps = NativeStackScreenProps<
-  RootStackParamList,
-  'SignUpScreen'
->
+type SignUpScreenProps = AuthScreenProps<'SignUpScreen'>
 
-export function SignUpScreen({}: SignUpScreenProps) {
+export function SignUpScreen({ navigation }: SignUpScreenProps) {
   const { control, formState, handleSubmit } = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
     mode: 'onChange',
@@ -32,14 +28,14 @@ export function SignUpScreen({}: SignUpScreenProps) {
 
   function submitForm(formValues: SignUpSchema) {
     console.log({ formValues })
-    // navigation.replace('SuccessScreen', {
-    //   title: 'Sua conta foi criada com sucesso!',
-    //   description: 'Agora é só fazer login na nossa plataforma',
-    //   icon: {
-    //     name: 'checkRound',
-    //     color: 'success',
-    //   },
-    // })
+    navigation.replace('SuccessScreen', {
+      title: 'Sua conta foi criada com sucesso!',
+      description: 'Agora é só fazer login na nossa plataforma',
+      icon: {
+        name: 'checkRound',
+        color: 'success',
+      },
+    })
   }
 
   return (

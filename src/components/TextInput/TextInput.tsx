@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { ReactElement, useRef } from 'react'
 import {
   Pressable,
   TextInput as RNTextInput,
@@ -14,7 +14,7 @@ import { $fontFamily, $fontSizes, Text } from '../Text/Text'
 export interface TextInputProps extends RNTextInputProps {
   label: string
   errorMessage?: string
-  RightComponent?: React.ReactElement
+  RightComponent?: ReactElement
   boxProps?: BoxProps
 }
 

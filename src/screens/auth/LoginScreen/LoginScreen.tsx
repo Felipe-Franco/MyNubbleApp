@@ -1,7 +1,7 @@
-import { Alert } from 'react-native'
+import { useContext } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { useNavigation } from '@react-navigation/native'
 import { useForm } from 'react-hook-form'
 
 import {
@@ -11,16 +11,14 @@ import {
   Screen,
   Text,
 } from '@components'
-import { RootStackParamList } from '@routes'
+import { SignInContext } from '@hooks'
+import { AuthScreenProps } from '@routes'
 
 import { LoginScheme, loginScheme } from './loginScheme'
 
-type LoginScreenProps = NativeStackScreenProps<
-  RootStackParamList,
-  'LoginScreen'
->
+type LoginScreenProps = AuthScreenProps<'LoginScreen'>
 
-export function LoginScreen({ navigation }: LoginScreenProps) {
+export function LoginScreen({}: LoginScreenProps) {
   const { control, handleSubmit, formState } = useForm<LoginScheme>({
     resolver: zodResolver(loginScheme),
     mode: 'onChange',
@@ -30,6 +28,10 @@ export function LoginScreen({ navigation }: LoginScreenProps) {
     },
   })
 
+  const signInContext = useContext(SignInContext)
+
+  const navigation = useNavigation()
+
   function navigateToSignUpScreen() {
     navigation.navigate('SignUpScreen')
   }
@@ -38,8 +40,8 @@ export function LoginScreen({ navigation }: LoginScreenProps) {
     navigation.navigate('ForgotPasswordScreen')
   }
 
-  function submitForm({ email, password }: LoginScheme) {
-    Alert.alert(`Email: ${email}, Password: ${password}`)
+  function submitForm({}: LoginScheme) {
+    signInContext.signIn()
   }
 
   return (
@@ -47,7 +49,7 @@ export function LoginScreen({ navigation }: LoginScreenProps) {
       <Text preset='headingLarge' marginBottom='s8'>
         Olá!
       </Text>
-      <Text preset='paragraphLarge' marginBottom='s40'>
+      <Text preset='paragraphLarge' marginBottom='s48'>
         Digite seu email e senha para entrar
       </Text>
 

@@ -1,0 +1,2 @@
+npm rum lint
+npx tsc --noEmit

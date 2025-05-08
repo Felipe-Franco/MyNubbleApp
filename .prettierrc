@@ -5,6 +5,7 @@
   "jsxSingleQuote": true,
   "bracketSpacing": true,
   "bracketSameLine": false,
+  "singleAttributePerLine": false,
   "arrowParens": "always",
   "tabWidth": 2,
   "plugins": [

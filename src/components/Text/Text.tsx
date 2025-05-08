@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react'
 import { TextStyle } from 'react-native'
 
 import { createText } from '@shopify/restyle'
@@ -12,7 +13,7 @@ interface TextProps extends SRTextProps {
 }
 
 const SRText = createText<Theme>()
-type SRTextProps = React.ComponentProps<typeof SRText>
+type SRTextProps = ComponentProps<typeof SRText>
 
 export function Text({
   preset = 'paragraphMedium',

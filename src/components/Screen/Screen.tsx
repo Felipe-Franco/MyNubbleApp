@@ -1,31 +1,34 @@
+import { ReactNode } from 'react'
 import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native'
 
-import { useNavigation } from '@react-navigation/native'
-
-import { Box, Icon, Text, TouchableOpacityBox } from '@components'
+import { Box, BoxProps } from '@components'
 import { useAppSafeArea, useAppTheme } from '@hooks'
 
 import {
   ScrollViewContainer,
   ViewContainer,
 } from './components/ScreenContainer'
+import { ScreenHeader } from './components/ScreenHeader'
 
-interface ScreenProps {
-  children?: React.ReactNode
+export interface ScreenProps extends BoxProps {
+  children?: ReactNode
   canGoBack?: boolean
   scrollable?: boolean
+  title?: string
 }
 
 export function Screen({
   canGoBack = false,
   scrollable = false,
   children,
+  title,
+  style,
+  ...boxProps
 }: ScreenProps) {
   const { top, bottom } = useAppSafeArea()
   const { colors } = useAppTheme()
   const keyboardBehavior = Platform.OS === 'ios' ? 'padding' : 'height'
   const Container = scrollable ? ScrollViewContainer : ViewContainer
-  const navigation = useNavigation()
 
   return (
     <KeyboardAvoidingView
@@ -35,22 +38,10 @@ export function Screen({
       <Container backgroundColor={colors.background}>
         <Box
           paddingHorizontal='s24'
-          style={{ paddingTop: top, paddingBottom: bottom }}
+          style={[{ paddingTop: top, paddingBottom: bottom }, style]}
+          {...boxProps}
         >
-          {canGoBack && (
-            <TouchableOpacityBox
-              onPress={navigation.goBack}
-              marginBottom='s24'
-              flexDirection='row'
-              alignItems='center'
-              alignSelf='flex-start'
-            >
-              <Icon name='arrowLeft' color='primary' />
-              <Text preset='paragraphMedium' semiBold={true} marginLeft='s8'>
-                Voltar
-              </Text>
-            </TouchableOpacityBox>
-          )}
+          <ScreenHeader canGoBack={canGoBack} title={title} />
           {children}
         </Box>
       </Container>

@@ -1,7 +1,8 @@
+import { ReactNode } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 
 interface ScreenContainerProps {
-  children?: React.ReactNode
+  children?: ReactNode
   backgroundColor: string
 }
 

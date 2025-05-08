@@ -1,15 +1,13 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { useNavigation } from '@react-navigation/native'
 
 import { Button, Icon, Screen, Text } from '@components'
-import { RootStackParamList } from '@routes'
+import { AuthScreenProps } from '@routes'
 
-type SuccessScreenProps = NativeStackScreenProps<
-  RootStackParamList,
-  'SuccessScreen'
->
+type SuccessScreenProps = AuthScreenProps<'SuccessScreen'>
 
-export function SuccessScreen({ navigation, route }: SuccessScreenProps) {
-  const params = route.params
+export function SuccessScreen({ route }: SuccessScreenProps) {
+  const { title, description, icon } = route.params
+  const navigation = useNavigation()
 
   function goBackToBegin() {
     navigation.goBack()
@@ -17,12 +15,12 @@ export function SuccessScreen({ navigation, route }: SuccessScreenProps) {
 
   return (
     <Screen>
-      <Icon name={params.icon.name} color={params.icon.color} />
+      <Icon name={icon.name} color={icon.color} />
       <Text preset='headingLarge' marginTop='s24'>
-        {params.title}
+        {title}
       </Text>
       <Text preset='paragraphLarge' marginTop='s16'>
-        {params.description}
+        {description}
       </Text>
       <Button
         title='Voltar ao inicio'
