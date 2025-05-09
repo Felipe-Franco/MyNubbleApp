@@ -1,21 +1,21 @@
-import { useState } from 'react'
+import { PostComment, postCommentService } from '@domain'
+import { MutationOptions, useMutation } from '@infra'
 
-import { postCommentService } from '@domain'
-
-export function usePostCommentCreate(postId: number) {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+export function usePostCommentCreate(
+  postId: number,
+  options?: MutationOptions<PostComment>,
+) {
+  const { mutate, loading, error } = useMutation<
+    {
+      message: string
+    },
+    PostComment
+  >(({ message }) => {
+    return postCommentService.create(postId, message)
+  }, options)
 
   async function createPostComment(message: string) {
-    try {
-      setLoading(true)
-      setError(null)
-      await postCommentService.create(postId, message)
-    } catch (e) {
-      setError('Erro ao criar post')
-    } finally {
-      setLoading(false)
-    }
+    await mutate({ message })
   }
 
   return {

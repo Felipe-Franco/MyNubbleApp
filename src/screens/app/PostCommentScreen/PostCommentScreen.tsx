@@ -12,17 +12,25 @@ import { PostCommentTextMessage } from './components/PostCommentTextMessage'
 type PostCommentScreenProps = AppScreenProps<'PostCommentScreen'>
 
 export function PostCommentScreen({ route }: PostCommentScreenProps) {
-  const { postId } = route.params
+  const { postId, postAuthorId } = route.params
   const { bottom } = useAppSafeArea()
 
   const {
     dataList: postCommentList,
     hasNextPage,
     fetchNextPage,
+    refresh,
   } = usePostCommentList(postId)
 
   function renderItem({ item }: ListRenderItemInfo<PostComment>) {
-    return <PostCommentItem comment={item} />
+    return (
+      <PostCommentItem
+        postComment={item}
+        postAuthorId={postAuthorId}
+        userId={1}
+        onRemoveComment={refresh}
+      />
+    )
   }
 
   function keyExtractor(comment: PostComment) {
@@ -45,7 +53,7 @@ export function PostCommentScreen({ route }: PostCommentScreenProps) {
         }
       />
 
-      <PostCommentTextMessage postId={postId} />
+      <PostCommentTextMessage postId={postId} onAddComment={refresh} />
     </Screen>
   )
 }

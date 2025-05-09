@@ -12,6 +12,7 @@ export type AppStackParamList = {
   }
   PostCommentScreen: {
     postId: number
+    postAuthorId: number
   }
 }
 

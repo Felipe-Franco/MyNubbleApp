@@ -48,7 +48,7 @@
                 "position": "before"
               },
               {
-                "pattern": "@+(api|assets|routes|screens|components|hooks|theme|icons|domain|types|utils)",
+                "pattern": "@+(api|assets|routes|screens|components|hooks|theme|icons|domain|types|utils|infra|services)",
                 "group": "internal",
                 "position": "before"
               },
@@ -77,13 +77,6 @@
     "import/extensions": [
       "warn",
       "never"
-    ],
-    "indent": [
-      "warn",
-      2,
-      {
-        "SwitchCase": 1
-      }
     ],
     "react/react-in-jsx-scope": [
       "off"

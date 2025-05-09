@@ -20,11 +20,17 @@
       "@hooks": [
         "src/hooks"
       ],
+      "@infra": [
+        "src/infra"
+      ],
       "@routes": [
         "src/routes"
       ],
       "@screens": [
         "src/screens"
+      ],
+      "@services": [
+        "src/services"
       ],
       "@theme": [
         "src/theme"

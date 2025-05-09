@@ -1,4 +1,4 @@
-import { PostComment, PostCommentAPI } from './postCommentTypes'
+import { PostComment, PostCommentAPI } from '@domain'
 
 function toPostComment(postCommentAPI: PostCommentAPI): PostComment {
   return {
@@ -6,6 +6,7 @@ function toPostComment(postCommentAPI: PostCommentAPI): PostComment {
     message: postCommentAPI.message,
     createdAt: postCommentAPI.created_at,
     author: {
+      id: postCommentAPI.user.id,
       name: postCommentAPI.user.full_name,
       profileURL: postCommentAPI.user.profile_url,
       userName: postCommentAPI.user.username,

@@ -28,7 +28,23 @@ async function create(postId: number, message: string): Promise<PostComment> {
   return postCommentAdapter.toPostComment(postCommentAPI)
 }
 
+async function remove(postCommentId: number): Promise<string> {
+  const result = await postCommentApi.remove(postCommentId)
+
+  return result.message
+}
+
+function isAllowedToDelete(
+  postAuthorId: number,
+  postCommentAuthorId: number,
+  userId: number,
+): boolean {
+  return postAuthorId === userId || postCommentAuthorId === userId
+}
+
 export const postCommentService = {
   getList,
   create,
+  remove,
+  isAllowedToDelete,
 }

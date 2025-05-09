@@ -51,6 +51,7 @@ export function TextMessage({
           onPress={onPressSend}
           bold={true}
           disabled={sendIsDisabled}
+          marginLeft='s8'
         >
           Enviar
         </Text>
