@@ -5,7 +5,7 @@ type MyProfileScreenProps = AppTabScreenProps<'MyProfileScreen'>
 
 export function MyProfileScreen({}: MyProfileScreenProps) {
   return (
-    <Screen>
+    <Screen canGoBack={true}>
       <Text>My Profile Screen</Text>
     </Screen>
   )

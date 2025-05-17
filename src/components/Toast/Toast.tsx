@@ -1,52 +1,76 @@
-import { useEffect } from 'react'
-import { Dimensions } from 'react-native'
+import { useCallback, useEffect } from 'react'
+import { Animated, StyleSheet, useAnimatedValue } from 'react-native'
 
-import { Box, Icon, Text } from '@components'
 import { useToast, useToastService } from '@services'
-import { $shadowStyle } from '@theme'
 
-interface ToastProps {}
+import { ToastContent } from './components/ToastContent'
 
-const MAX_WIDTH = Dimensions.get('screen').width * 0.9
+const DEFAULT_TOAST_DURATION = 3000
+const FADE_ANIMATION_DURATION = 300
 
-export function Toast({}: ToastProps) {
+export function Toast() {
   const toast = useToast()
+  const toastPosition = toast?.position ? toast.position : 'top'
   const { hideToast } = useToastService()
+  const fadeAnim = useAnimatedValue(0)
+
+  const runEnterAnimation = useCallback(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: FADE_ANIMATION_DURATION,
+      useNativeDriver: true,
+    }).start()
+  }, [fadeAnim])
+
+  const runExitAnimation = useCallback(
+    (callBack: Animated.EndCallback) => {
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: FADE_ANIMATION_DURATION,
+        useNativeDriver: true,
+      }).start(callBack)
+    },
+    [fadeAnim],
+  )
 
   useEffect(() => {
     if (toast) {
+      runEnterAnimation()
+
       setTimeout(() => {
-        hideToast()
-      }, toast.duration || 2000)
+        runExitAnimation(hideToast)
+      }, toast.duration || DEFAULT_TOAST_DURATION)
     }
-  }, [toast, hideToast])
+  }, [toast, hideToast, runEnterAnimation, runExitAnimation])
 
   if (!toast) {
     return null
   }
 
   return (
-    <Box
-      flexDirection='row'
-      maxWidth={MAX_WIDTH}
-      position='absolute'
-      padding='s16'
-      backgroundColor='background'
-      borderRadius='s16'
-      alignItems='center'
-      alignSelf='center'
-      opacity={0.95}
-      style={$shadowStyle}
+    <Animated.View
+      style={[
+        styles.animatedContainer,
+        styles[toastPosition],
+        {
+          opacity: fadeAnim,
+        },
+      ]}
     >
-      <Icon name='checkRound' size={32} color='success' />
-      <Text
-        flexShrink={1}
-        preset='paragraphMedium'
-        bold={true}
-        marginLeft='s16'
-      >
-        {toast?.message}
-      </Text>
-    </Box>
+      <ToastContent toast={toast} />
+    </Animated.View>
   )
 }
+
+const styles = StyleSheet.create({
+  animatedContainer: {
+    position: 'absolute',
+    alignSelf: 'center',
+  },
+  top: {
+    top: 50,
+  },
+  bottom: {
+    bottom: 100,
+  },
+})

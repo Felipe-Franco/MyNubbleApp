@@ -3,7 +3,7 @@ import { ThemeColor } from '@theme'
 
 export interface ButtonUI {
   container: TouchableOpacityBoxProps
-  content: ThemeColor
+  contentColor: ThemeColor
 }
 
 export const buttonPresets: Record<
@@ -18,13 +18,13 @@ export const buttonPresets: Record<
       container: {
         backgroundColor: 'primary',
       },
-      content: 'primaryContrast',
+      contentColor: 'primaryContrast',
     },
     disabled: {
       container: {
         backgroundColor: 'gray4',
       },
-      content: 'gray2',
+      contentColor: 'gray2',
     },
   },
   outline: {
@@ -33,14 +33,14 @@ export const buttonPresets: Record<
         borderWidth: 1,
         borderColor: 'primary',
       },
-      content: 'primary',
+      contentColor: 'primary',
     },
     disabled: {
       container: {
         borderWidth: 1,
         borderColor: 'gray4',
       },
-      content: 'gray2',
+      contentColor: 'gray2',
     },
   },
 }

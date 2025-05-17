@@ -26,8 +26,7 @@ export function SignUpScreen({ navigation }: SignUpScreenProps) {
     },
   })
 
-  function submitForm(formValues: SignUpSchema) {
-    console.log({ formValues })
+  function submitForm({}: SignUpSchema) {
     navigation.replace('SuccessScreen', {
       title: 'Sua conta foi criada com sucesso!',
       description: 'Agora é só fazer login na nossa plataforma',

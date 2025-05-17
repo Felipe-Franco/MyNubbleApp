@@ -7,10 +7,10 @@ import { useAppTheme } from '@hooks'
 import { ThemeColor } from '@theme'
 
 interface Props extends Omit<ActivityIndicatorProps, 'color'> {
-  color: ThemeColor
+  color?: ThemeColor
 }
 
-export function ActivityIndicator({ color }: Props) {
+export function ActivityIndicator({ color = 'primary'}: Props) {
   const { colors } = useAppTheme()
   return <RNActivityIndicator color={colors[color]} />
 }

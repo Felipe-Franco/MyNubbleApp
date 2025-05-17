@@ -6,17 +6,13 @@ import { usePostCommentCreate } from '@domain'
 
 interface PostCommentTextMessageProps {
   postId: number
-  onAddComment: () => void
 }
 
 export function PostCommentTextMessage({
   postId,
-  onAddComment,
 }: PostCommentTextMessageProps) {
   const [text, setText] = useState('')
-  const { createPostComment } = usePostCommentCreate(postId, {
-    onSuccess: onAddComment,
-  })
+  const { createPostComment } = usePostCommentCreate(postId)
 
   function onChangeText(newValue: string) {
     setText(newValue)

@@ -2,7 +2,7 @@ import { ActivityIndicator, Box, Button, Text } from '@components'
 
 interface HomeEmptyProps {
   loading: boolean
-  error: unknown
+  error: boolean
   refetch: () => void
 }
 

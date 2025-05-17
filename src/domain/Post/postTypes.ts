@@ -1,3 +1,5 @@
+import { UserAPI } from '@domain'
+
 export interface Post {
   id: number
   text: string
@@ -22,16 +24,7 @@ export interface PostAPI {
   is_activated: boolean
   created_at: string
   updated_at: string
-  user: {
-    id: number
-    first_name: string
-    last_name: string
-    username: string
-    email: string
-    profile_url: string
-    is_online: boolean
-    full_name: string
-  }
+  user: UserAPI
   status?: string
   meta: {
     like_count: string

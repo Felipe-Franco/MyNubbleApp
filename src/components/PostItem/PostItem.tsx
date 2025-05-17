@@ -13,7 +13,7 @@ interface PostItemProps {
 export function PostItem({ post }: PostItemProps) {
   return (
     <Box marginBottom='s24' paddingHorizontal='s24'>
-      <PostHeader profileURL={post.author.profileUrl} name={post.author.name} />
+      <PostHeader author={post.author} />
       <PostImage imageURL={post.imageURL} />
       <PostActions
         commentCount={post.commentCount}

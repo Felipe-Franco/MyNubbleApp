@@ -6,25 +6,24 @@ import { useToastService } from '@services'
 import { dateUtils } from '@utils'
 
 interface PostCommentItemProps {
+  postId: number
   postComment: PostComment
   postAuthorId: number
   userId: number
-  onRemoveComment: () => void
 }
 
 export function PostCommentItem({
   postComment,
   postAuthorId,
+  postId,
   userId,
-  onRemoveComment,
 }: PostCommentItemProps) {
   const { showToast } = useToastService()
-  const { removePostComment } = usePostCommentRemove({
+  const { removePostComment } = usePostCommentRemove(postId, {
     onSuccess: () => {
-      onRemoveComment()
       showToast({
-        message: 'Comentário removido ' + Math.random().toString(),
-        type: 'success',
+        message: 'Comentário removido com sucesso!',
+        position: 'bottom',
       })
     },
   })

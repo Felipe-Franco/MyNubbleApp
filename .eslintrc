@@ -3,12 +3,14 @@
   "extends": [
     "@react-native",
     "plugin:import/recommended",
+    "plugin:@tanstack/query/recommended",
     /*Deve ser o último: Make sure to put it last, so it gets the chance to override other configs*/
     "prettier"
   ],
   "plugins": [
     "only-warn",
     "module-resolver",
+    "@tanstack/query",
     "import"
   ],
   "settings": {

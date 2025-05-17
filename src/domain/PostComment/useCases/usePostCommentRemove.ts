@@ -1,15 +1,45 @@
-import { postCommentService } from '@domain'
-import { MutationOptions, useMutation } from '@infra'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-export function usePostCommentRemove(options?: MutationOptions<string>) {
-  const { mutate, loading, error } = useMutation<
-    { postCommentId: number },
-    string
-  >(({ postCommentId }) => postCommentService.remove(postCommentId), options)
+import { postCommentService } from '@domain'
+import { MutationOptions, QueryKeys } from '@infra'
+
+export function usePostCommentRemove(
+  postId: number,
+  options?: MutationOptions<string>,
+) {
+  const queryClient = useQueryClient()
+
+  const { mutate, error, isPending } = useMutation<
+    string,
+    string,
+    {
+      postCommentId: number
+    }
+  >({
+    mutationFn: ({ postCommentId }) => {
+      return postCommentService.remove(postCommentId)
+    },
+
+    onSuccess: (result) => {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.GetPostCommentList, postId],
+      })
+
+      if (options?.onSuccess) {
+        options.onSuccess(result)
+      }
+    },
+
+    onError: (e) => {
+      if (options?.onError) {
+        options.onError(e || 'Erro ao remover comentário')
+      }
+    },
+  })
 
   return {
     removePostComment: mutate,
-    loading,
+    isPending,
     error,
   }
 }
