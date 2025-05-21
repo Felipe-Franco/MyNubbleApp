@@ -11,7 +11,7 @@ export function usePostCommentCreate(
 
   const { mutate, error, isPending } = useMutation<
     PostComment,
-    string,
+    Error,
     {
       message: string
     }
@@ -32,7 +32,7 @@ export function usePostCommentCreate(
 
     onError: (e) => {
       if (options?.onError) {
-        options.onError(e || 'Erro ao criar post')
+        options.onError(e.message || 'Erro ao criar post')
       }
     },
   })

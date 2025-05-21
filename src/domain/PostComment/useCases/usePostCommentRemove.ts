@@ -11,7 +11,7 @@ export function usePostCommentRemove(
 
   const { mutate, error, isPending } = useMutation<
     string,
-    string,
+    Error,
     {
       postCommentId: number
     }
@@ -32,7 +32,7 @@ export function usePostCommentRemove(
 
     onError: (e) => {
       if (options?.onError) {
-        options.onError(e || 'Erro ao remover comentário')
+        options.onError(e.message || 'Erro ao remover comentário')
       }
     },
   })

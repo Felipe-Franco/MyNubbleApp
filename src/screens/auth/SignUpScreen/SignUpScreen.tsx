@@ -8,33 +8,47 @@ import {
   Screen,
   Text,
 } from '@components'
-import { AuthScreenProps } from '@routes'
+import { useAuthSignUp } from '@domain'
+import { AuthScreenProps, AuthStackParamList } from '@routes'
 
 import { SignUpSchema, signUpSchema } from './signUpSchema'
+
+const defaultValues: SignUpSchema = {
+  username: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+}
+
+const successScreenParams: AuthStackParamList['SuccessScreen'] = {
+  title: 'Sua conta foi criada com sucesso!',
+  description: 'Agora é só fazer login na nossa plataforma',
+  icon: {
+    name: 'checkRound',
+    color: 'success',
+  },
+}
 
 type SignUpScreenProps = AuthScreenProps<'SignUpScreen'>
 
 export function SignUpScreen({ navigation }: SignUpScreenProps) {
+  const { signUp, isLoading } = useAuthSignUp({
+    onSuccess: replaceWithSuccessScreen,
+  })
+
   const { control, formState, handleSubmit } = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
     mode: 'onChange',
-    defaultValues: {
-      username: '',
-      fullName: '',
-      email: '',
-      password: '',
-    },
+    defaultValues,
   })
 
-  function submitForm({}: SignUpSchema) {
-    navigation.replace('SuccessScreen', {
-      title: 'Sua conta foi criada com sucesso!',
-      description: 'Agora é só fazer login na nossa plataforma',
-      icon: {
-        name: 'checkRound',
-        color: 'success',
-      },
-    })
+  function replaceWithSuccessScreen() {
+    navigation.replace('SuccessScreen', successScreenParams)
+  }
+
+  function submitForm(signUpForm: SignUpSchema) {
+    signUp(signUpForm)
   }
 
   return (
@@ -53,9 +67,18 @@ export function SignUpScreen({ navigation }: SignUpScreenProps) {
 
       <FormTextInput
         control={control}
-        name='fullName'
-        label='Nome completo'
-        placeholder='Digite seu nome completo'
+        name='firstName'
+        label='Nome'
+        placeholder='Digite seu nome'
+        boxProps={{ marginBottom: 's20' }}
+        autoCapitalize='words'
+      />
+
+      <FormTextInput
+        control={control}
+        name='lastName'
+        label='Sobrenome'
+        placeholder='Digite seu sobrenome'
         boxProps={{ marginBottom: 's20' }}
         autoCapitalize='words'
       />
@@ -78,6 +101,7 @@ export function SignUpScreen({ navigation }: SignUpScreenProps) {
 
       <Button
         title='Criar conta'
+        loading={isLoading}
         disabled={!formState.isValid}
         marginBottom='s16'
         marginTop='s20'

@@ -6,12 +6,12 @@ import { useAuthCredentials } from '@services'
 
 export function useAuthSignOut(options?: MutationOptions<void>) {
   const { removeCredentials } = useAuthCredentials()
-  const { mutate, error, isPending } = useMutation<string, string, void>({
+  const { mutate, error, isPending } = useMutation<string, Error, void>({
     mutationFn: authService.signOut,
     onSuccess: removeCredentials,
     onError: (e) => {
       if (options?.onError) {
-        options.onError(e || 'Erro ao reliazar Logout')
+        options.onError(e.message || 'Erro ao reliazar Logout')
       }
     },
   })
