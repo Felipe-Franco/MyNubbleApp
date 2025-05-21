@@ -1,5 +1,3 @@
-import { useContext } from 'react'
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigation } from '@react-navigation/native'
 import { useForm } from 'react-hook-form'
@@ -11,8 +9,9 @@ import {
   Screen,
   Text,
 } from '@components'
-import { SignInContext } from '@hooks'
+import { useAuthSignIn } from '@domain'
 import { AuthScreenProps } from '@routes'
+import { useToastService } from '@services'
 
 import { LoginScheme, loginScheme } from './loginScheme'
 
@@ -28,9 +27,13 @@ export function LoginScreen({}: LoginScreenProps) {
     },
   })
 
-  const signInContext = useContext(SignInContext)
-
+  const { showToast } = useToastService()
   const navigation = useNavigation()
+  const { signIn, isLoading } = useAuthSignIn({
+    onError: (e) => {
+      showToast({ message: e, type: 'error' })
+    },
+  })
 
   function navigateToSignUpScreen() {
     navigation.navigate('SignUpScreen')
@@ -40,8 +43,8 @@ export function LoginScreen({}: LoginScreenProps) {
     navigation.navigate('ForgotPasswordScreen')
   }
 
-  function submitForm({}: LoginScheme) {
-    signInContext.signIn()
+  function submitForm(form: LoginScheme) {
+    signIn(form)
   }
 
   return (
@@ -80,6 +83,7 @@ export function LoginScreen({}: LoginScreenProps) {
 
       <Button
         title='Entrar'
+        loading={isLoading}
         marginTop='s48'
         onPress={handleSubmit(submitForm)}
         disabled={!formState.isValid}

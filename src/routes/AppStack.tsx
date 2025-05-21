@@ -7,9 +7,7 @@ import { AppTabBottomTabParamList, AppTabNavigator } from './AppTabNavigator'
 
 export type AppStackParamList = {
   AppTabNavigator: NavigatorScreenParams<AppTabBottomTabParamList>
-  SettingsScreen: {
-    username: string
-  }
+  SettingsScreen: undefined
   PostCommentScreen: {
     postId: number
     postAuthorId: number

@@ -1,24 +1,19 @@
-import { Button, Screen, Text } from '@components'
+import { Button, Screen } from '@components'
+import { useAuthSignOut } from '@domain'
 import { AppScreenProps } from '@routes'
 
 type SettingsScreenProps = AppScreenProps<'SettingsScreen'>
 
-export function SettingsScreen({ route, navigation }: SettingsScreenProps) {
-  const username = route.params.username
+export function SettingsScreen({}: SettingsScreenProps) {
+  const { signOut } = useAuthSignOut()
+
+  function handleSignOut() {
+    signOut()
+  }
 
   return (
-    <Screen canGoBack={true}>
-      <Text preset='headingSmall'>Settings Screen</Text>
-      <Text preset='headingMedium'>Be Welcome {username}</Text>
-
-      <Button
-        title='New Post'
-        onPress={() => {
-          navigation.popTo('AppTabNavigator', {
-            screen: 'NewPostScreen',
-          })
-        }}
-      />
+    <Screen canGoBack={true} title='Configurações'>
+      <Button title='Sair da conta' onPress={handleSignOut} />
     </Screen>
   )
 }

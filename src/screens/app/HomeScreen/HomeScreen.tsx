@@ -27,6 +27,8 @@ export function HomeScreen({}: HomeScreenProps) {
     fetchNextPage,
   } = usePostList()
 
+  console.log({ isLoading, postList })
+
   useScrollToTop(flatListRef)
 
   function renderItem({ item }: ListRenderItemInfo<Post>) {

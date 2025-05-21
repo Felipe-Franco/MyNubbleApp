@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react'
-
 import { QueryKey, useInfiniteQuery } from '@tanstack/react-query'
 
 import { Page } from '@types'
 
-interface UsePaginatedListResult<TData> {
-  list: TData[]
+export interface UsePaginatedListResult<T> {
+  list: T[]
   isError: boolean
   isLoading: boolean
   refresh: () => void
@@ -13,36 +11,27 @@ interface UsePaginatedListResult<TData> {
   hasNextPage: boolean
 }
 
-export function usePaginatedList<Data>(
+export const usePaginatedList = <T>(
   queryKey: QueryKey,
-  getList: (page: number) => Promise<Page<Data>>,
-): UsePaginatedListResult<Data> {
-  const [list, setList] = useState<Data[]>([])
+  getList: (page: number) => Promise<Page<T>>,
+): UsePaginatedListResult<T> => {
+  const { data, isError, isLoading, hasNextPage, fetchNextPage, refetch } =
+    useInfiniteQuery({
+      queryKey,
+      queryFn: ({ pageParam = 1 }) => getList(pageParam),
+      initialPageParam: 1,
+      getNextPageParam: ({ meta }) =>
+        meta.hasNextPage ? meta.currentPage + 1 : undefined,
+    })
 
-  const query = useInfiniteQuery({
-    queryKey: queryKey,
-    queryFn: ({ pageParam }) => getList(pageParam),
-    initialPageParam: 1,
-    getNextPageParam: ({ meta }) =>
-      meta.hasNextPage ? meta.currentPage + 1 : null,
-  })
-
-  useEffect(() => {
-    if (query.data) {
-      const newList = query.data.pages.reduce<Data[]>((prev, curr) => {
-        return [...prev, ...curr.data]
-      }, [])
-
-      setList(newList)
-    }
-  }, [query.data])
+  const list = data?.pages.flatMap((page) => page.data) || []
 
   return {
     list,
-    isLoading: query.isLoading,
-    isError: query.isError,
-    hasNextPage: query.hasNextPage,
-    fetchNextPage: query.fetchNextPage,
-    refresh: query.refetch,
+    isError,
+    isLoading,
+    refresh: refetch,
+    fetchNextPage,
+    hasNextPage: hasNextPage,
   }
 }
