@@ -21,6 +21,16 @@ async function signUp(signUpData: SignUpDataApi) {
   await authApi.signUp(signUpData)
 }
 
+async function isUserNameAvailable(username: string) {
+  const result = await authApi.isUserNameAvailable({ username })
+  return result.isAvailable
+}
+
+async function isEmailAvailable(email: string) {
+  const result = await authApi.isEmailAvailable({ email })
+  return result.isAvailable
+}
+
 function updateToken(token: string) {
   api.defaults.headers.common.Authorization = `Bearer ${token}`
 }
@@ -35,4 +45,6 @@ export const authService = {
   signUp,
   updateToken,
   removeToken,
+  isUserNameAvailable,
+  isEmailAvailable,
 }
