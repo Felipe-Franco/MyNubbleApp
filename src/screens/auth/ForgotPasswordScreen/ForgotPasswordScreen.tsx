@@ -2,12 +2,23 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
 import { Button, FormTextInput, Screen, Text } from '@components'
-import { AuthScreenProps } from '@routes'
+import { useAuthRequestNewPassword } from '@domain'
+import { AuthScreenProps, AuthStackParamList } from '@routes'
+import { useToastService } from '@services'
 
 import {
   ForgotPasswordSchema,
   forgotPasswordSchema,
 } from './forgotPasswordSchema'
+
+const successScreenParams: AuthStackParamList['SuccessScreen'] = {
+  title: 'Enviamos as instruções para seu e-mail!',
+  description: 'Clique no link enviado no seu e-mail para recuperar sua senha',
+  icon: {
+    name: 'messageRound',
+    color: 'primary',
+  },
+}
 
 type ForgotPasswordScreenProps = AuthScreenProps<'ForgotPasswordScreen'>
 
@@ -22,17 +33,23 @@ export function ForgotPasswordScreen({
     },
   })
 
+  const { showToast } = useToastService()
+
+  const { requestNewPassword, isLoading } = useAuthRequestNewPassword({
+    onSuccess: replaceWithSuccessScreen,
+    onError: showErrorToast,
+  })
+
+  function replaceWithSuccessScreen() {
+    navigation.replace('SuccessScreen', successScreenParams)
+  }
+
+  function showErrorToast(message: string) {
+    showToast({ message, type: 'error' })
+  }
+
   function submitForm({ email }: ForgotPasswordSchema) {
-    navigation.replace('SuccessScreen', {
-      title: 'Enviamos as instruções para seu e-mail!',
-      description:
-        'Clique no link enviado no seu e-mail para recuperar sua senha' +
-        `\n ${email}`,
-      icon: {
-        name: 'messageRound',
-        color: 'primary',
-      },
-    })
+    requestNewPassword(email)
   }
 
   return (
@@ -51,6 +68,7 @@ export function ForgotPasswordScreen({
         keyboardType='email-address'
       />
       <Button
+        loading={isLoading}
         disabled={!formState.isValid}
         title='Recuperar senha'
         marginTop='s40'

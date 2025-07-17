@@ -48,10 +48,21 @@ async function isEmailAvailable(params: {
   return response.data
 }
 
+async function forgotPassword(body: { email: string }): Promise<{
+  message: string
+}> {
+  const response = await api.post<{
+    message: string
+  }>('/forgot-password', body)
+
+  return response.data
+}
+
 export const authApi = {
   signIn,
   signOut,
   signUp,
   isUserNameAvailable,
-  isEmailAvailable
+  isEmailAvailable,
+  forgotPassword,
 }
