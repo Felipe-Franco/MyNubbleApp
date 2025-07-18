@@ -10,7 +10,7 @@ interface Props extends Omit<ActivityIndicatorProps, 'color'> {
   color?: ThemeColor
 }
 
-export function ActivityIndicator({ color = 'primary'}: Props) {
+export function ActivityIndicator({ color = 'primary' }: Props) {
   const { colors } = useAppTheme()
   return <RNActivityIndicator color={colors[color]} />
 }

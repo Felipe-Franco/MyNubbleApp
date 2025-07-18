@@ -40,7 +40,11 @@ export function Button({
       {loading ? (
         <ActivityIndicator color={buttonPreset.contentColor} />
       ) : (
-        <Text preset='paragraphMedium' bold={true} color={buttonPreset.contentColor}>
+        <Text
+          preset='paragraphMedium'
+          bold={true}
+          color={buttonPreset.contentColor}
+        >
           {title}
         </Text>
       )}

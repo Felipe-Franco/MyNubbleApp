@@ -15,7 +15,6 @@ export interface AuthCredentialsAPI {
     expires_at: string //'2025-07-17T06:28:44.380+00:00'
   }
   user: UserAPI
-
 }
 
 export interface SignInData {
