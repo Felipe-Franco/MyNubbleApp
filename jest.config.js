@@ -7,4 +7,11 @@ module.exports = {
     '/node_modules/',
     'index',
   ],
+  transformIgnorePatterns: [
+    "node_modules/(?!(@react-native|react-native|@react-navigation)/)"
+  ],
+  moduleDirectories: [
+    "node_modules",
+    "./src/test"
+  ]
 }
