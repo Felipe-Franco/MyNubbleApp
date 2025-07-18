@@ -2,10 +2,14 @@ import { AuthCredentials, AuthCredentialsAPI } from '@domain'
 
 import { userAdapter } from '../User/userAdapter'
 
-function toAuthCredentials(authApi: AuthCredentialsAPI): AuthCredentials {
+function toAuthCredentials(
+  authCredentialsAPI: AuthCredentialsAPI,
+): AuthCredentials {
   return {
-    token: authApi.auth.token,
-    user: userAdapter.toUser(authApi.user),
+    token: authCredentialsAPI.auth.token,
+    user: userAdapter.toUser(authCredentialsAPI.user),
+    refreshToken: authCredentialsAPI.auth.refreshToken,
+    tokenExpiresAt: authCredentialsAPI.auth.expires_at,
   }
 }
 

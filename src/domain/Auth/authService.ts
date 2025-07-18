@@ -6,8 +6,8 @@ import { SignUpDataApi } from './authTypes'
 
 async function signIn(email: string, password: string) {
   try {
-    const response = await authApi.signIn(email, password)
-    return authAdapter.toAuthCredentials(response)
+    const result = await authApi.signIn(email, password)
+    return authAdapter.toAuthCredentials(result)
   } catch (error) {
     throw new Error('email ou senha inválidos')
   }
@@ -36,6 +36,11 @@ async function requestNewPassword(email: string) {
   return result.message
 }
 
+async function authenticateByRefreshToken(refreshToken: string) {
+  const result = await authApi.refreshToken(refreshToken)
+  return authAdapter.toAuthCredentials(result)
+}
+
 function updateToken(token: string) {
   api.defaults.headers.common.Authorization = `Bearer ${token}`
 }
@@ -52,5 +57,6 @@ export const authService = {
   removeToken,
   isUserNameAvailable,
   isEmailAvailable,
-  requestNewPassword
+  requestNewPassword,
+  authenticateByRefreshToken,
 }

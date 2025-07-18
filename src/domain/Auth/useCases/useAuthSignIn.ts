@@ -31,7 +31,6 @@ export function useAuthSignIn(options?: MutationOptions<AuthCredentials>) {
     },
     onError: (e) => {
       if (options?.onError) {
-        console.log({ error: e })
         options.onError(e.message || 'Erro ao realizar Login')
       }
     },
