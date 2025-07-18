@@ -1,6 +1,11 @@
-export function capitalizeFirstLetter(value: string) {
+function capitalizeFirstLetter(value: string) {
   return value
-    .split(' ')
+    .trim()
+    .split(RegExp('\\s+'))
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(' ')
+}
+
+export const stringUtils = {
+  capitalizeFirstLetter,
 }

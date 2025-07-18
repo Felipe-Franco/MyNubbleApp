@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { capitalizeFirstLetter } from '@utils'
+import { stringUtils } from '@utils'
 
 const userNameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{4,29}$/gim
 
@@ -15,13 +15,13 @@ export const signUpSchema = z.object({
     .string()
     .min(3, 'nome muito curto')
     .max(50, 'nome muito longo')
-    .transform(capitalizeFirstLetter),
+    .transform(stringUtils.capitalizeFirstLetter),
 
   lastName: z
     .string()
     .min(5, 'nome muito curto')
     .max(50, 'nome muito longo')
-    .transform(capitalizeFirstLetter),
+    .transform(stringUtils.capitalizeFirstLetter),
 
   email: z.string().email('email inválido'),
 
