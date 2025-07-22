@@ -1,6 +1,6 @@
-import { ButtonProps, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 
-import { Button } from '@components'
+import { Button, ButtonProps } from '@components'
 import { theme } from '@theme'
 
 import { fireEvent, render, screen } from 'test-utils'
@@ -17,7 +17,7 @@ describe('<Button />', () => {
     const mockedOnPress = jest.fn()
 
     renderComponent({ onPress: mockedOnPress })
-    fireEvent.press(screen.getByText(BUTTON_TITLE))
+    fireEvent.press(screen.getByTestId('touchable-opacity'))
     expect(mockedOnPress).toHaveBeenCalled()
   })
 
@@ -25,14 +25,37 @@ describe('<Button />', () => {
     const mockedOnPress = jest.fn()
 
     renderComponent({ onPress: mockedOnPress, disabled: true })
-    fireEvent.press(screen.getByText(BUTTON_TITLE))
+    fireEvent.press(screen.getByTestId('touchable-opacity'))
     expect(mockedOnPress).not.toHaveBeenCalled()
   })
 
   test('the title should be gray if button is disabled', () => {
     renderComponent({ disabled: true })
-    const view = screen.getByText(BUTTON_TITLE)
-    const titleStyle = StyleSheet.flatten(view.props.style)
+    const buttonTitle = screen.getByText(BUTTON_TITLE)
+    const titleStyle = StyleSheet.flatten(buttonTitle.props.style)
     expect(titleStyle.color).toEqual(theme.colors.gray2)
+  })
+
+  describe('when button is loading', () => {
+    it('shows activity indicator', () => {
+      renderComponent({ loading: true })
+      const activityIndicator = screen.getByTestId('activity-indicator')
+
+      expect(activityIndicator).toBeTruthy()
+    })
+
+    it('hides button title', () => {
+      renderComponent({ loading: true })
+      const buttonTitle = screen.queryByText(BUTTON_TITLE)
+
+      expect(buttonTitle).toBeFalsy()
+    })
+
+    it('does not call onPress', () => {
+      const mockedOnPress = jest.fn()
+      renderComponent({ loading: true, onPress: mockedOnPress })
+      fireEvent.press(screen.getByTestId('touchable-opacity'))
+      expect(mockedOnPress).not.toHaveBeenCalled()
+    })
   })
 })

@@ -7,7 +7,7 @@ import {
 
 import { buttonPresets } from './buttonPresets'
 
-interface ButtonProps extends TouchableOpacityBoxProps {
+export interface ButtonProps extends TouchableOpacityBoxProps {
   title: string
   loading?: boolean
   preset?: ButtonPreset
@@ -28,6 +28,7 @@ export function Button({
 
   return (
     <TouchableOpacityBox
+      testID='touchable-opacity'
       height={50}
       paddingHorizontal='s20'
       alignItems='center'
