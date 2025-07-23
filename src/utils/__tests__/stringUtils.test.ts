@@ -13,7 +13,9 @@ describe('stringUtils', () => {
     })
 
     it('should remove leading/trailing spaces', () => {
-      expect(stringUtils.capitalizeFirstLetter(' Ana    Maria ')).toBe('Ana Maria')
+      expect(stringUtils.capitalizeFirstLetter(' Ana    Maria ')).toBe(
+        'Ana Maria',
+      )
       expect(stringUtils.capitalizeFirstLetter('    Maria  ')).toBe('Maria')
     })
   })
