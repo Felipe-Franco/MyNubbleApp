@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint --fix --max-warnings=0 ./src",
     "start": "react-native start",
-    "test": "jest",
+    "test": "jest --verbose",
+    "coverage": "jest --verbose --coverage",
     "prepare": "husky",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
   },
