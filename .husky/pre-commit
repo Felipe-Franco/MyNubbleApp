@@ -1,2 +1,4 @@
-npm rum lint
 npx tsc --noEmit
+
+npx lint-staged
+
