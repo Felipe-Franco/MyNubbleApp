@@ -6,20 +6,7 @@ import { render } from 'test-utils'
 
 import { PostBottom } from '../PostBottom'
 
-const mockedPost: Post = {
-  id: 1,
-  imageURL: 'fake-url',
-  commentCount: 0,
-  favoriteCount: 0,
-  reactionCount: 0,
-  text: 'Mocked Post Text',
-  author: {
-    id: 2,
-    name: 'Maria Julia',
-    profileUrl: 'https://example.com',
-    username: 'mariajulia',
-  },
-}
+import { mockedPost } from './mockedData/mockedPost'
 
 function renderComponent(post: Post) {
   render(<PostBottom {...post} />)
