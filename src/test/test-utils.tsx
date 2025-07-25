@@ -12,7 +12,7 @@ import {
 
 import { theme } from '@theme'
 
-export const wrapperAllProviders = () => {
+const wrapperAllProviders = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
