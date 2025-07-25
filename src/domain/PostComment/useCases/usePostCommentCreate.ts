@@ -32,7 +32,7 @@ export function usePostCommentCreate(
 
     onError: (e) => {
       if (options?.onError) {
-        options.onError(e.message || 'Erro ao criar post')
+        options.onError(e.message)
       }
     },
   })

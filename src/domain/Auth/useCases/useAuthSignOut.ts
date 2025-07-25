@@ -11,7 +11,7 @@ export function useAuthSignOut(options?: MutationOptions<void>) {
     onSuccess: removeCredentials,
     onError: (e) => {
       if (options?.onError) {
-        options.onError(e.message || 'Erro ao reliazar Logout')
+        options.onError(e.message)
       }
     },
   })

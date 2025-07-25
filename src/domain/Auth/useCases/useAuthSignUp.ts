@@ -13,7 +13,7 @@ export function useAuthSignUp(options?: MutationOptions<void>) {
     },
     onError: (e) => {
       if (options?.onError) {
-        options.onError(e.message || 'Erroa ao realizar cadastro')
+        options.onError(e.message)
       }
     },
   })

@@ -2,7 +2,9 @@ import { createContext, PropsWithChildren, useEffect, useState } from 'react'
 
 import { registerInterceptor } from '@api'
 import { AuthCredentials, authService } from '@domain'
-import { AuthCredentialsService, authCredentialsStorage } from '@services'
+
+import { authCredentialsStorage } from '../authCredentialsStorage'
+import { AuthCredentialsService } from '../authCredentialsType'
 
 export const AuthCredentialsContext = createContext<AuthCredentialsService>({
   authCredentials: null,

@@ -13,7 +13,7 @@ type Variables = {
 
 export function useAuthSignIn(options?: MutationOptions<AuthCredentials>) {
   const { saveCredentials } = useAuthCredentials()
-  const { mutate, error, isPending } = useMutation<
+  const { mutate, error, isPending, isSuccess, isError } = useMutation<
     AuthCredentials,
     //TODO: Mapear erros corretamente da api
     Error,
@@ -31,7 +31,7 @@ export function useAuthSignIn(options?: MutationOptions<AuthCredentials>) {
     },
     onError: (e) => {
       if (options?.onError) {
-        options.onError(e.message || 'Erro ao realizar Login')
+        options.onError(e.message)
       }
     },
   })
@@ -42,7 +42,9 @@ export function useAuthSignIn(options?: MutationOptions<AuthCredentials>) {
 
   return {
     signIn,
+    isSuccess,
     isLoading: isPending,
     error,
+    isError,
   }
 }
