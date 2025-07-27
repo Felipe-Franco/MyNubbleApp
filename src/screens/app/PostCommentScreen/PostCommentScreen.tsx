@@ -4,6 +4,7 @@ import { Screen } from '@components'
 import { PostComment, usePostCommentList } from '@domain'
 import { useAppSafeArea } from '@hooks'
 import { AppScreenProps } from '@routes'
+import { useAuthCredentials } from '@services'
 
 import { PostCommentBottom } from './components/PostCommentBottom'
 import { PostCommentItem } from './components/PostCommentItem'
@@ -14,6 +15,7 @@ type PostCommentScreenProps = AppScreenProps<'PostCommentScreen'>
 export function PostCommentScreen({ route }: PostCommentScreenProps) {
   const { postId, postAuthorId } = route.params
   const { bottom } = useAppSafeArea()
+  const { userId } = useAuthCredentials()
 
   const {
     list: postCommentList,
@@ -27,7 +29,7 @@ export function PostCommentScreen({ route }: PostCommentScreenProps) {
         postId={postId}
         postComment={item}
         postAuthorId={postAuthorId}
-        userId={1}
+        userId={userId}
       />
     )
   }

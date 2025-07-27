@@ -9,7 +9,7 @@ interface PostCommentItemProps {
   postId: number
   postComment: PostComment
   postAuthorId: number
-  userId: number
+  userId: number | null
 }
 
 export function PostCommentItem({
