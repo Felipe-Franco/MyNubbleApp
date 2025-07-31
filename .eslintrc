@@ -50,7 +50,7 @@
                 "position": "before"
               },
               {
-                "pattern": "@+(api|assets|routes|screens|components|hooks|theme|icons|domain|types|utils|infra|services)",
+                "pattern": "@+(api|assets|routes|screens|components|hooks|theme|icons|domain|types|utils|infra|services|test)",
                 "group": "internal",
                 "position": "before"
               },

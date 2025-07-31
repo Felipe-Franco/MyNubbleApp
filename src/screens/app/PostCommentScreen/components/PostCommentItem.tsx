@@ -50,7 +50,7 @@ export function PostCommentItem({
   }
 
   return (
-    <Pressable onLongPress={openRemoveDialog}>
+    <Pressable onLongPress={openRemoveDialog} testID='post-comment-item'>
       <Box flexDirection='row' alignItems='center' marginBottom='s16'>
         <ProfileAvatar profileURL={postComment.author.profileURL} />
         <Box marginLeft='s12' flex={1}>

@@ -3,7 +3,7 @@ import type { Config } from 'jest'
 const config: Config = {
   preset: 'react-native',
   collectCoverageFrom: [
-    'src/{components,utils,hooks,domain,infra}/**/*.{js,jsx,ts,tsx}',
+    'src/{components,utils,hooks,domain,infra,screens}/**/*.{js,jsx,ts,tsx}',
   ],
   coveragePathIgnorePatterns: ['/node_modules/', 'index'],
   transformIgnorePatterns: [
@@ -12,6 +12,9 @@ const config: Config = {
   moduleDirectories: ['node_modules', './src/test'],
   modulePathIgnorePatterns: ['.*/mockedData/.*'],
   setupFiles: ['./src/test/jestSetup.ts'],
+  testEnvironmentOptions: {
+    customExportConditions: [''],
+  },
 }
 
 export default config
