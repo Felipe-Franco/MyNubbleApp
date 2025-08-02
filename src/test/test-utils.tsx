@@ -14,6 +14,7 @@ import {
   renderHook,
 } from '@testing-library/react-native'
 
+import { Toast } from '@components'
 import { AuthCredentialsProvider } from '@services'
 import { theme } from '@theme'
 
@@ -50,6 +51,7 @@ function wrapScreenProviders() {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
           <NavigationContainer>{children} </NavigationContainer>
+          <Toast />
         </ThemeProvider>
       </QueryClientProvider>
     </AuthCredentialsProvider>

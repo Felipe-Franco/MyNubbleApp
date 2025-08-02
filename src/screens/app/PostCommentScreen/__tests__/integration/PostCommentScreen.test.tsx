@@ -1,8 +1,10 @@
 import { Alert, AlertButton } from 'react-native'
 
 import {
+  act,
   fireEvent,
   screen,
+  waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/react-native'
 
@@ -12,14 +14,20 @@ import { postCommentMocks, resetInMemoryResponse, server } from '@test'
 
 import { renderScreen } from 'test-utils'
 
-beforeAll(() => server.listen())
+beforeAll(() => {
+  server.listen()
+  jest.useFakeTimers()
+})
+
 beforeEach(() => {
   server.resetHandlers()
   resetInMemoryResponse()
 })
+
 afterAll(() => {
   server.close()
   jest.resetAllMocks()
+  jest.useRealTimers()
 })
 
 describe('integration: <PostCommentScreen />', () => {
@@ -99,6 +107,14 @@ describe('integration: <PostCommentScreen />', () => {
     await waitForElementToBeRemoved(() =>
       screen.queryByText(mateusPostCommentAPI.message, { exact: false }),
     )
+
+    await waitFor(() => {
+      expect(screen.getByTestId('toast-message')).toBeTruthy()
+    })
+
+    act(() => jest.runAllTimers())
+
+    expect(screen.queryByTestId('toast-message')).toBeNull()
 
     allComments = await screen.findAllByTestId('post-comment-item')
     expect(allComments.length).toBe(1)
