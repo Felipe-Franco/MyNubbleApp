@@ -1,6 +1,6 @@
 import { Image } from 'react-native'
 
-interface ProfileAvatarProps {
+export interface ProfileAvatarProps {
   profileURL: string
   size?: number
   borderRadius?: number

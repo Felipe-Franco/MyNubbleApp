@@ -4,8 +4,16 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { Toast } from '@components'
 import { Router } from '@routes'
-import { AuthCredentialsProvider, ToastProvider } from '@services'
 import { theme } from '@theme'
+
+/*
+  DO NOT SHORTHAND THESE IMPORTS, imports of '@Services' is NOT ALLOWED on App.tsx
+* */
+import { AuthCredentialsProvider } from './src/services/authCredentials/Providers/AuthCredentialsProvider'
+import { initializeStorage } from './src/services/storage/storage'
+import { ToastProvider } from './src/services/toast/Providers/ToastProvider'
+
+initializeStorage()
 
 const queryClient = new QueryClient()
 

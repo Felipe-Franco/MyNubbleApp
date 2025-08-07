@@ -24,7 +24,7 @@ export function PostBottom({
   return (
     <Box marginTop='s16'>
       <Text preset='paragraphMedium' bold={true}>
-        {author.name}
+        {author.fullName}
       </Text>
       <Text preset='paragraphMedium' color='gray1'>
         {text}

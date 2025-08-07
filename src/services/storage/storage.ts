@@ -6,4 +6,8 @@ export interface Storage {
   removeItem: (key: string) => Promise<void>
 }
 
-export let storage: Storage = MMKVStorage
+export let storage: Storage
+
+export function initializeStorage() {
+  storage = MMKVStorage
+}

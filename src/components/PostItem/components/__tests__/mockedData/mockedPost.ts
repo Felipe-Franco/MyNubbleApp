@@ -9,8 +9,12 @@ export const mockedPost: Post = {
   text: 'Mocked Post Text',
   author: {
     id: 2,
-    name: 'Maria Julia',
+    fullName: 'Maria Julia',
     profileUrl: 'https://example.com',
     username: 'mariajulia',
+    email: 'mariajulia@coffstack.com',
+    firstName: 'Maria',
+    lastName: 'Julia',
+    isOnline: false,
   },
 }

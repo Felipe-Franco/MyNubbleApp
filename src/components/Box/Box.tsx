@@ -24,22 +24,19 @@ import { Theme } from '@theme'
 export const Box = createBox<Theme>()
 export type BoxProps = ComponentProps<typeof Box>
 
-export type TouchableOpacityBoxProps = TouchableOpacityProps &
-  BackgroundColorProps<Theme> &
+type RestyleProps = BackgroundColorProps<Theme> &
   SpacingProps<Theme> &
   LayoutProps<Theme> &
   BorderProps<Theme>
+
+export type TouchableOpacityBoxProps = TouchableOpacityProps & RestyleProps
 
 export const TouchableOpacityBox = createRestyleComponent<
   TouchableOpacityBoxProps,
   Theme
 >([backgroundColor, spacing, layout, border], TouchableOpacity)
 
-export type PressableBoxProps = PressableProps &
-  BackgroundColorProps<Theme> &
-  SpacingProps<Theme> &
-  LayoutProps<Theme> &
-  BorderProps<Theme>
+export type PressableBoxProps = PressableProps & RestyleProps
 
 export const PressableBox = createRestyleComponent<PressableBoxProps, Theme>(
   [backgroundColor, spacing, layout, border],

@@ -1,15 +1,10 @@
-import { Post, PostAPI } from '@domain'
+import { Post, PostAPI, userAdapter } from '@domain'
 
 const toPost = (postAPI: PostAPI): Post => {
   return {
     id: postAPI.id,
     text: postAPI.text,
-    author: {
-      id: postAPI.user.id,
-      profileUrl: postAPI.user.profile_url,
-      name: postAPI.user.full_name,
-      username: postAPI.user.username,
-    },
+    author: userAdapter.toUser(postAPI.user),
     imageURL: postAPI.image_url,
     reactionCount: parseInt(postAPI.meta.like_count, 10),
     favoriteCount: parseInt(postAPI.meta.favorite_count, 10),

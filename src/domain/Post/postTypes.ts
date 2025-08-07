@@ -1,14 +1,9 @@
-import { UserAPI } from '@domain'
+import { User, UserAPI } from '@domain'
 
 export interface Post {
   id: number
   text: string
-  author: {
-    id: number
-    profileUrl: string
-    name: string
-    username: string
-  }
+  author: User
   imageURL: string
   reactionCount: number
   commentCount: number

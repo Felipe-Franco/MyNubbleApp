@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren, useState } from 'react'
 
-import { Toast, ToastService } from '@services'
+import { Toast, ToastService } from '../toastTypes'
 
 export const ToastContext = createContext<ToastService>({
   toast: null,
