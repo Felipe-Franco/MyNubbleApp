@@ -5,9 +5,6 @@ import { storage } from '../storage/storage'
 
 import { SearchHistoryService } from './searchHistoryTypes'
 
-let st = storage
-console.log('Storage:', { st })
-
 const searchHistoryStore = create<SearchHistoryService>()(
   persist(
     (set, get) => ({

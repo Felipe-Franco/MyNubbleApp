@@ -24,7 +24,6 @@ export function SearchScreen({}: SearchScreenProps) {
         user={user}
         onPress={() => {
           addUser(user)
-          console.log('Adicionou usuário com sucesso: ' + JSON.stringify(user))
         }}
         profileAvatarProps={{ size: 48 }}
       />
