@@ -29,6 +29,7 @@ export function ScreenHeader({
     >
       {canGoBack && (
         <TouchableOpacityBox
+          testID='screen-back-button'
           flexDirection='row'
           alignItems='center'
           marginRight='s10'
