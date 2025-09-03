@@ -1,7 +1,7 @@
 import { api, PageAPI } from '@api'
 import { UserAPI } from '@domain'
 
-const USER_PATH = 'users'
+export const USER_PATH = 'users'
 
 async function getById(userId: number): Promise<UserAPI> {
   const response = await api.get<UserAPI>(`${USER_PATH}/${userId}`)

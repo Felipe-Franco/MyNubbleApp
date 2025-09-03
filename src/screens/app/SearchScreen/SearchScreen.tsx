@@ -26,6 +26,7 @@ export function SearchScreen({}: SearchScreenProps) {
           addUser(user)
         }}
         profileAvatarProps={{ size: 48 }}
+        marginBottom='s8'
       />
     )
   }

@@ -10,10 +10,11 @@ import { theme } from '@theme'
   DO NOT SHORTHAND THESE IMPORTS, imports of '@Services' is NOT ALLOWED on App.tsx
 * */
 import { AuthCredentialsProvider } from './src/services/authCredentials/Providers/AuthCredentialsProvider'
+import { MMKVStorage } from './src/services/storage/implementation/MMKVStorage'
 import { initializeStorage } from './src/services/storage/storage'
 import { ToastProvider } from './src/services/toast/Providers/ToastProvider'
 
-initializeStorage()
+initializeStorage(MMKVStorage)
 
 const queryClient = new QueryClient()
 

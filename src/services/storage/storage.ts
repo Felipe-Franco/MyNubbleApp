@@ -1,5 +1,3 @@
-import { MMKVStorage } from './implementation/MMKVStorage'
-
 export interface Storage {
   getItem: <T>(key: string) => Promise<T | null>
   setItem: <T>(key: string, value: T) => Promise<void>
@@ -8,6 +6,6 @@ export interface Storage {
 
 export let storage: Storage
 
-export function initializeStorage() {
-  storage = MMKVStorage
+export function initializeStorage(s: Storage) {
+  storage = s
 }

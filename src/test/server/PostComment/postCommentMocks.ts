@@ -15,14 +15,14 @@ const mateusUserAPI: UserAPI = {
   full_name: 'Mateus de Souza',
 }
 
-export const mateusAuthCredentials: AuthCredentials = {
+const mateusAuthCredentials: AuthCredentials = {
   token: 'access-token',
   tokenExpiresAt: '2030-10-07T12:08:50.433+00:00',
   refreshToken: 'refresh-token',
   user: userAdapter.toUser(mateusUserAPI),
 }
 
-export const mateusPostCommentAPI: PostCommentAPI = {
+const mateusPostCommentAPI: PostCommentAPI = {
   id: 113,
   message: 'Iure bene angelus.',
   user_id: 7,

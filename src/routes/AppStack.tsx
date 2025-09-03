@@ -25,9 +25,16 @@ export type AppStackParamList = {
 
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
-export function AppStack() {
+interface AppStackProps {
+  initialRouteName?: keyof AppStackParamList
+}
+
+export function AppStack({
+  initialRouteName = 'AppTabNavigator',
+}: AppStackProps) {
   return (
     <Stack.Navigator
+      initialRouteName={initialRouteName}
       screenOptions={{
         headerShown: false,
       }}
