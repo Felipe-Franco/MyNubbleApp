@@ -2,6 +2,7 @@ export { AuthCredentialsProvider } from './authCredentials/Providers/AuthCredent
 export * from './authCredentials/authCredentialsStorage'
 export * from './authCredentials/authCredentialsType'
 export * from './authCredentials/useAuthCredentials'
+export * from './cameraRoll/useCameraRoll'
 export * from './searchHistory/useSearchHistory'
 export * from './storage/implementation/asyncStorage'
 export * from './storage/storage'
