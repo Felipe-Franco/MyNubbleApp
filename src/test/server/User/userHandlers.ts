@@ -13,6 +13,7 @@ export const userHandlers = [
 
     return HttpResponse.json(response, { status: 200 })
   }),
+
   http.get<{ userId: string }>(`${FULL_URL}/:userId`, async ({ params }) => {
     const userApi = userMocks.userList.find(
       (user) => user.id.toString() === params.userId,

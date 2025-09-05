@@ -16,7 +16,7 @@ export function ScreenHeader({
 }: ScreenHeaderProps) {
   const navigation = useNavigation()
 
-  if (!canGoBack && !title) return null
+  if (!canGoBack && !title && !HeaderComponent) return null
 
   const showBackLabel = !title && !HeaderComponent
 
