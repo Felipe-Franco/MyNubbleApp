@@ -17,6 +17,7 @@ export interface TextInputProps extends RNTextInputProps {
   LeftComponent?: ReactElement
   RightComponent?: ReactElement
   boxProps?: BoxProps
+  containerProps?: BoxProps
 }
 
 export function TextInput({
@@ -25,6 +26,7 @@ export function TextInput({
   LeftComponent,
   RightComponent,
   boxProps,
+  containerProps,
   ...rnTextInputProps
 }: TextInputProps) {
   const { colors } = useAppTheme()
@@ -49,6 +51,7 @@ export function TextInput({
           borderColor={errorMessage ? 'error' : 'gray2'}
           borderWidth={errorMessage ? 2 : 1}
           borderRadius='s12'
+          {...containerProps}
         >
           {LeftComponent && (
             <Box marginRight='s16' justifyContent='center'>

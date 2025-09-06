@@ -5,7 +5,7 @@ import { createText } from '@shopify/restyle'
 
 import { Theme } from '@theme'
 
-interface TextProps extends SRTextProps {
+export interface TextProps extends SRTextProps {
   preset?: TextPresets
   bold?: boolean
   italic?: boolean

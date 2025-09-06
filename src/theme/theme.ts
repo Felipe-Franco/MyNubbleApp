@@ -55,6 +55,7 @@ export const theme = createTheme({
     buttonGrayContent: palette.gray1,
   },
   spacing: {
+    s0: 0,
     s4: 4,
     s8: 8,
     s10: 10,

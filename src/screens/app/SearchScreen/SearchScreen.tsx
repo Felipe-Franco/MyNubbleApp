@@ -44,6 +44,7 @@ export function SearchScreen({}: SearchScreenProps) {
           placeholder='Digite sua busca'
           LeftComponent={<Icon name='search' color='gray3' />}
           onChangeText={setSearch}
+          boxProps={{ marginLeft: 's10' }}
         />
       }
     >
