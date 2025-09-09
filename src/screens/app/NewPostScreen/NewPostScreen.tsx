@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { Dimensions, FlatList, Image, ListRenderItemInfo } from 'react-native'
 
-import { PressableBox, Screen } from '@components'
+import { PermissionManager, PressableBox, Screen } from '@components'
 import { AppTabScreenProps } from '@routes'
 import { useCameraRoll, usePermission } from '@services'
 
@@ -18,7 +18,6 @@ export function NewPostScreen({}: NewPostScreenProps) {
   const [selectedImage, setSelectedImage] = useState<string>()
   const { photoList, fetchNextPage } = useCameraRoll(
     photoLibraryPermissionStatus === 'granted',
-    setSelectedImage,
   )
   const flatListRef = useRef<FlatList>(null)
 
@@ -43,18 +42,23 @@ export function NewPostScreen({}: NewPostScreenProps) {
   }
 
   return (
-    <Screen canGoBack={true} title='Novo post' noPaddingHorizontal={true}>
-      <FlatList
-        ref={flatListRef}
-        data={photoList}
-        renderItem={renderItem}
-        numColumns={NUM_COLUMNS}
-        ListHeaderComponent={
-          <Header imageUri={selectedImage} imageSize={SCREEN_WIDTH} />
-        }
-        onEndReached={fetchNextPage}
-        onEndReachedThreshold={0.1}
-      />
-    </Screen>
+    <PermissionManager
+      permissionName='photoLibrary'
+      description='Permita o nubble acessar as imagens da sua galeria'
+    >
+      <Screen canGoBack={true} title='Novo post' noPaddingHorizontal={true}>
+        <FlatList
+          ref={flatListRef}
+          data={photoList}
+          renderItem={renderItem}
+          numColumns={NUM_COLUMNS}
+          ListHeaderComponent={
+            <Header imageUri={selectedImage} imageSize={SCREEN_WIDTH} />
+          }
+          onEndReached={fetchNextPage}
+          onEndReachedThreshold={0.1}
+        />
+      </Screen>
+    </PermissionManager>
   )
 }

@@ -6,10 +6,7 @@ import { QueryKeys } from '@infra'
 
 import { cameraRollService } from './cameraRollService'
 
-export function useCameraRoll(
-  hasPermission: boolean,
-  onInitialLoad?: (imageUri?: string) => void,
-) {
+export function useCameraRoll(hasPermission: boolean) {
   const [photoList, setPhotoList] = useState<string[]>([])
 
   const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
@@ -27,12 +24,8 @@ export function useCameraRoll(
       }, [])
 
       setPhotoList(newList)
-
-      if (data?.pages.length === 1 && onInitialLoad) {
-        onInitialLoad(newList[0])
-      }
     }
-  }, [data, onInitialLoad])
+  }, [data])
 
   return {
     photoList,
