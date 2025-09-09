@@ -37,6 +37,10 @@ export function useCameraRoll(
   return {
     photoList,
     hasNextPage,
-    fetchNextPage: () => fetchNextPage(),
+    fetchNextPage: () => {
+      if (hasPermission) {
+        fetchNextPage()
+      }
+    },
   }
 }

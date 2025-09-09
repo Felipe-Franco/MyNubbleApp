@@ -3,7 +3,7 @@ import { Dimensions, FlatList, Image, ListRenderItemInfo } from 'react-native'
 
 import { PressableBox, Screen } from '@components'
 import { AppTabScreenProps } from '@routes'
-import { useCameraRoll } from '@services'
+import { useCameraRoll, usePermission } from '@services'
 
 import { Header } from './components/Header'
 
@@ -14,14 +14,17 @@ const NUM_COLUMNS = 4
 const ITEM_SIZE = SCREEN_WIDTH / NUM_COLUMNS
 
 export function NewPostScreen({}: NewPostScreenProps) {
+  const { status: photoLibraryPermissionStatus } = usePermission('photoLibrary')
   const [selectedImage, setSelectedImage] = useState<string>()
-  const { photoList, fetchNextPage } = useCameraRoll(true, setSelectedImage)
+  const { photoList, fetchNextPage } = useCameraRoll(
+    photoLibraryPermissionStatus === 'granted',
+    setSelectedImage,
+  )
   const flatListRef = useRef<FlatList>(null)
 
   function onSelectImage(imageUri: string) {
     setSelectedImage(imageUri)
     flatListRef.current?.scrollToOffset({ offset: 0, animated: true })
-    console.log({ imageUri })
   }
 
   function renderItem({ item }: ListRenderItemInfo<string>) {

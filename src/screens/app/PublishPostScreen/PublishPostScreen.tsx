@@ -30,7 +30,7 @@ export function PublishPostScreen({ route }: PublishPostScreenProps) {
         value={description}
         onChangeText={setDescription}
         placeholder='Digite aqui...'
-        containerProps={{ borderWidth: 0, padding: 's0' }}
+        containerProps={{ borderWidth: 0 }}
       />
 
       <Button title='Publicar post' marginTop='s56' />
