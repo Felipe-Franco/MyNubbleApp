@@ -6,7 +6,7 @@ import { AppScreenProps } from '@routes'
 
 type PublishPostScreenProps = AppScreenProps<'PublishPostScreen'>
 
-const IMAGE_SIZE = Dimensions.get('window').width / 2
+const IMAGE_SIZE = Dimensions.get('screen').width / 2
 
 export function PublishPostScreen({ route }: PublishPostScreenProps) {
   const [description, setDescription] = useState('')

@@ -21,6 +21,10 @@ export function Header({ imageUri, imageSize }: HeaderProps) {
     }
   }
 
+  function navigateToCameraScreen() {
+    navigation.navigate('CameraScreen')
+  }
+
   return (
     <Box>
       <ImageBackground
@@ -34,7 +38,7 @@ export function Header({ imageUri, imageSize }: HeaderProps) {
         ]}
       >
         <Button
-          title='Escolher essa'
+          title={imageUri ? 'Escolher essa' : 'Escolha uma foto'}
           marginBottom='s24'
           preset='ghost'
           onPress={navigateToPublishPostScreen}
@@ -48,7 +52,7 @@ export function Header({ imageUri, imageSize }: HeaderProps) {
         paddingVertical='s16'
       >
         <Text preset='headingSmall'>Sua galeria</Text>
-        <Icon name='camera' />
+        <Icon name='camera' onPress={navigateToCameraScreen} />
       </Box>
     </Box>
   )

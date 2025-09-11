@@ -8,16 +8,15 @@ export function usePermission(permissionName: PermissionName) {
   const [isLoading, setIsLoading] = useState(true)
 
   async function checkPermission() {
-    setIsLoading(true)
-
     try {
-      let initialStatus = await permissionService.check(permissionName)
-
+      setIsLoading(true)
+      const initialStatus = await permissionService.check(permissionName)
       if (initialStatus === 'denied') {
-        initialStatus = await permissionService.request(permissionName)
+        const _status = await permissionService.request(permissionName)
+        setStatus(_status)
+      } else {
+        setStatus(initialStatus)
       }
-
-      setStatus(initialStatus)
     } catch (error) {
       setStatus('unavailable')
     } finally {
@@ -27,7 +26,7 @@ export function usePermission(permissionName: PermissionName) {
 
   useEffect(() => {
     checkPermission()
-    //eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return {

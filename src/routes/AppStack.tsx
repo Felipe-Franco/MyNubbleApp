@@ -9,6 +9,8 @@ import {
   SettingsScreen,
 } from '@screens'
 
+import { CameraScreen } from '../screens/app/CameraScreen/CameraScreen'
+
 import { AppTabBottomTabParamList, AppTabNavigator } from './AppTabNavigator'
 
 export type AppStackParamList = {
@@ -25,6 +27,7 @@ export type AppStackParamList = {
   PublishPostScreen: {
     imageUri: string
   }
+  CameraScreen: undefined
 }
 
 const Stack = createNativeStackNavigator<AppStackParamList>()
@@ -49,6 +52,7 @@ export function AppStack({
       <Stack.Screen name='ProfileScreen' component={ProfileScreen} />
       <Stack.Screen name='SearchScreen' component={SearchScreen} />
       <Stack.Screen name='PublishPostScreen' component={PublishPostScreen} />
+      <Stack.Screen name='CameraScreen' component={CameraScreen} />
     </Stack.Navigator>
   )
 }

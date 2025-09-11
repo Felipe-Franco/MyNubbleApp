@@ -49,6 +49,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Para publicar novos posts</string>
+	<string>MyNubble precisa acessar a galeria de fotos.</string>
+	<key>NSCameraUsageDescription</key>
+    <string>MyNubble precisa acessar sua Camera.</string>
 </dict>
 </plist>

@@ -24,7 +24,8 @@ async function request(
   const permission = mapPermissionNameToPermission(permissionName)
 
   if (permission) {
-    return await PermissionsAndroid.request(permission)
+    const result = await PermissionsAndroid.request(permission)
+    return result
   }
 
   return 'unavailable'

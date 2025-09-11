@@ -9,15 +9,15 @@ import { Header } from './components/Header'
 
 type NewPostScreenProps = AppTabScreenProps<'NewPostScreen'>
 
-const SCREEN_WIDTH = Dimensions.get('window').width
+const SCREEN_WIDTH = Dimensions.get('screen').width
 const NUM_COLUMNS = 4
 const ITEM_SIZE = SCREEN_WIDTH / NUM_COLUMNS
 
 export function NewPostScreen({}: NewPostScreenProps) {
-  const { status: photoLibraryPermissionStatus } = usePermission('photoLibrary')
+  const permission = usePermission('photoLibrary')
   const [selectedImage, setSelectedImage] = useState<string>()
   const { photoList, fetchNextPage } = useCameraRoll(
-    photoLibraryPermissionStatus === 'granted',
+    permission.status === 'granted',
   )
   const flatListRef = useRef<FlatList>(null)
 
