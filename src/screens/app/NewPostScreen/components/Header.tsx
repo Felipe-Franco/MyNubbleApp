@@ -38,6 +38,7 @@ export function Header({ imageUri, imageSize }: HeaderProps) {
         ]}
       >
         <Button
+          disabled={!imageUri}
           title={imageUri ? 'Escolher essa' : 'Escolha uma foto'}
           marginBottom='s24'
           preset='ghost'
