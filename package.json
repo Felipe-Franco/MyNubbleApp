@@ -24,6 +24,8 @@
     "@tanstack/react-query": "^5.76.0",
     "axios": "^1.12.0",
     "date-fns": "^4.1.0",
+    "expo": "^54.0.2",
+    "expo-image-manipulator": "~14.0.7",
     "lodash": "^4.17.21",
     "react": "19.1.0",
     "react-hook-form": "^7.55.0",
@@ -35,8 +37,7 @@
     "react-native-svg": "^15.11.2",
     "react-native-vision-camera": "^4.7.2",
     "zod": "^3.24.2",
-    "zustand": "^5.0.4",
-    "expo": "^54.0.2"
+    "zustand": "^5.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

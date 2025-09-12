@@ -13,6 +13,7 @@ import {
 import { Box, Icon, PermissionManager } from '@components'
 import { useAppSafeArea, useAppState } from '@hooks'
 import { AppScreenProps } from '@routes'
+import { multimediaService } from '@services'
 
 type CameraScreenProps = AppScreenProps<'CameraScreen'>
 
@@ -52,7 +53,7 @@ export function CameraScreen({ navigation }: CameraScreenProps) {
       })
 
       navigation.navigate('PublishPostScreen', {
-        imageUri: `file://${photo?.path}`,
+        imageUri: multimediaService.prepareImageUri(photo.path),
       })
     }
   }

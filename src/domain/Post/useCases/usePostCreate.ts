@@ -30,8 +30,8 @@ export function usePostCreate(options?: MutationOptions<Post>) {
     },
   })
 
-  function createPost(description: string, imageUri: string) {
-    const imageCover = multimediaService.prepareImageForUpload(imageUri)
+  async function createPost(description: string, imageUri: string) {
+    const imageCover = await multimediaService.prepareImageForUpload(imageUri)
     mutate({ text: description, imageCover })
   }
 
