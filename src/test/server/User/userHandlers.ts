@@ -11,7 +11,7 @@ export const userHandlers = [
   http.get(FULL_URL, async () => {
     const response: PageAPI<UserAPI> = userMocks.mockedUserResponse
 
-    return HttpResponse.json(response, { status: 200 })
+    return HttpResponse.json<PageAPI<UserAPI>>(response, { status: 200 })
   }),
 
   http.get<{ userId: string }>(`${FULL_URL}/:userId`, async ({ params }) => {

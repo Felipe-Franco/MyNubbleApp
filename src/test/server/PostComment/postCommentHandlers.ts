@@ -17,8 +17,7 @@ const URL = `${BASE_API_URL}${POST_COMMENT_PATH}`
 export const postCommentHandlers = [
   http.get(URL, async () => {
     const response: PageAPI<PostCommentAPI> = inMemoryResponse
-
-    return HttpResponse.json(response, { status: 200 })
+    return HttpResponse.json<PageAPI<PostCommentAPI>>(response, { status: 200 })
   }),
 
   http.post<
