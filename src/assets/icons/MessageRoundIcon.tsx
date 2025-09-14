@@ -1,12 +1,12 @@
 import { Circle, Path, Svg } from 'react-native-svg'
 
 import { IconBase } from '@components'
-import { colors } from '@theme'
+import { palette } from '@theme'
 
 export const MessageRoundIcon = ({
   size = 48,
-  color = colors.greenPrimary,
-  fillColor = colors.grayWhite,
+  color = palette.greenPrimary,
+  fillColor = palette.grayWhite,
 }: IconBase) => {
   return (
     <Svg width={size} height={size} viewBox='0 0 48 48' fill='none'>

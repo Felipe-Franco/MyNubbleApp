@@ -47,6 +47,7 @@ export function TextInput({
 
         <Box
           flexDirection='row'
+          backgroundColor='grayWhite'
           padding='s16'
           borderColor={errorMessage ? 'error' : 'gray2'}
           borderWidth={errorMessage ? 2 : 1}

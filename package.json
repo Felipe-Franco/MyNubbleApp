@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "adb-reverse": "adb reverse tcp:3333 tcp:3333 && adb reverse tcp:9090 tcp:9090 && adb reverse tcp:9000 tcp:9000 ",
+    "adb": "adb reverse tcp:3333 tcp:3333 && adb reverse tcp:9090 tcp:9090 && adb reverse tcp:9000 tcp:9000 ",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint --fix --max-warnings=0 ./src",
