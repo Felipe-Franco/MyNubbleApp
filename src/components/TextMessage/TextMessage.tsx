@@ -47,7 +47,7 @@ export function TextMessage({
           {...rnTextInputProps}
         />
         <Text
-          color={sendIsDisabled ? 'gray2' : 'primary'}
+          color={sendIsDisabled ? 'gray2' : 'greenPrimary'}
           onPress={onPressSend}
           bold={true}
           disabled={sendIsDisabled}

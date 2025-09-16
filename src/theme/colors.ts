@@ -58,6 +58,7 @@ const darkTheme: ThemeType = {
   buttonPrimary: palette.carrotSecondary,
   background: palette.grayBlack,
   backgroundContrast: palette.grayWhite,
+  paragraph: palette.grayWhite,
 }
 
 export const colors = { palette, lightTheme, darkTheme }
