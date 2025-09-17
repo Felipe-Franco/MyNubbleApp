@@ -1,6 +1,7 @@
 export * from './ActivityIndicator/ActivityIndicator'
 export * from './Box/Box'
 export * from './Button/Button'
+export * from './Divider/Divider'
 export * from './Form/FormPasswordInput'
 export * from './Form/FormTextInput'
 export * from './Icon/Icon'

@@ -59,6 +59,8 @@ const darkTheme: ThemeType = {
   background: palette.grayBlack,
   backgroundContrast: palette.grayWhite,
   paragraph: palette.grayWhite,
+  iconColor: palette.greenPrimaryLight,
+  iconFillColor: palette.grayBlack,
 }
 
 export const colors = { palette, lightTheme, darkTheme }

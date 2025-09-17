@@ -48,6 +48,7 @@ export type IconProps = {
   name: IconName
   size?: number
   color?: ThemeColor
+  fillColor?: ThemeColor
   onPress?: () => void
 }
 
@@ -56,6 +57,7 @@ export function Icon({
   size,
   onPress,
   color = 'backgroundContrast',
+  fillColor = 'background',
 }: IconProps) {
   const SVGIcon = iconRegistry[name]
   const { colors } = useAppTheme()
@@ -63,12 +65,18 @@ export function Icon({
   if (onPress) {
     return (
       <Pressable testID={name} hitSlop={10} onPress={onPress}>
-        <SVGIcon size={size} color={colors[color]} />
+        <SVGIcon
+          size={size}
+          color={colors[color]}
+          fillColor={colors[fillColor]}
+        />
       </Pressable>
     )
   }
 
-  return <SVGIcon size={size} color={colors[color]} />
+  return (
+    <SVGIcon size={size} color={colors[color]} fillColor={colors[fillColor]} />
+  )
 }
 
 export const iconRegistry = {

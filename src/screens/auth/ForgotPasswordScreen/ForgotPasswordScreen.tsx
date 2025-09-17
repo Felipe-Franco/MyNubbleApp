@@ -16,7 +16,8 @@ const successScreenParams: AuthStackParamList['SuccessScreen'] = {
   description: 'Clique no link enviado no seu e-mail para recuperar sua senha',
   icon: {
     name: 'messageRound',
-    color: 'primary',
+    color: 'iconColor',
+    fillColor: 'iconFillColor',
   },
 }
 
