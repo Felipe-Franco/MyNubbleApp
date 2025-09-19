@@ -16,7 +16,7 @@ import {
 
 import { Toast } from '@components'
 import { AuthCredentialsProvider } from '@services'
-import { theme } from '@theme'
+import { lightTheme } from '@theme'
 
 const queryClientConfig: QueryClientConfig = {
   defaultOptions: {
@@ -36,7 +36,7 @@ function wrapAllProviders() {
 
   return ({ children }: { children: React.ReactNode }) => (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={lightTheme}>
         <NavigationContainer>{children} </NavigationContainer>
       </ThemeProvider>
     </QueryClientProvider>
@@ -49,7 +49,7 @@ function wrapScreenProviders() {
   return ({ children }: { children: React.ReactNode }) => (
     <AuthCredentialsProvider>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={lightTheme}>
           <NavigationContainer>{children} </NavigationContainer>
           <Toast />
         </ThemeProvider>
@@ -87,5 +87,4 @@ export * from '@testing-library/react-native'
 // eslint-disable-next-line import/export
 export { customRender as render }
 // eslint-disable-next-line import/export
-export { customRenderHook as renderHook }
-export { renderScreen }
+export { customRenderHook as renderHook, renderScreen }

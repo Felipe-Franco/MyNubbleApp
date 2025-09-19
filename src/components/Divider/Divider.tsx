@@ -7,7 +7,7 @@ export function Divider() {
     <Box
       height={StyleSheet.hairlineWidth}
       width='100%'
-      backgroundColor='gray4'
+      backgroundColor='onBackgroundGray2'
     />
   )
 }

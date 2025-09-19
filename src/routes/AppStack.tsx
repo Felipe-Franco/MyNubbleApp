@@ -2,6 +2,7 @@ import { NavigatorScreenParams } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import {
+  DarkModeScreen,
   PostCommentScreen,
   ProfileScreen,
   PublishPostScreen,
@@ -28,6 +29,7 @@ export type AppStackParamList = {
     imageUri: string
   }
   CameraScreen: undefined
+  DarkModeScreen: undefined
 }
 
 const Stack = createNativeStackNavigator<AppStackParamList>()
@@ -53,6 +55,7 @@ export function AppStack({
       <Stack.Screen name='SearchScreen' component={SearchScreen} />
       <Stack.Screen name='PublishPostScreen' component={PublishPostScreen} />
       <Stack.Screen name='CameraScreen' component={CameraScreen} />
+      <Stack.Screen name='DarkModeScreen' component={DarkModeScreen} />
     </Stack.Navigator>
   )
 }

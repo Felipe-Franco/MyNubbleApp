@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 
 import { Button, ButtonProps } from '@components'
-import { theme } from '@theme'
+import { lightTheme } from '@theme'
 
 import { fireEvent, render, screen } from 'test-utils'
 
@@ -33,7 +33,7 @@ describe('<Button />', () => {
     renderComponent({ disabled: true })
     const buttonTitle = screen.getByText(BUTTON_TITLE)
     const titleStyle = StyleSheet.flatten(buttonTitle.props.style)
-    expect(titleStyle.color).toEqual(theme.colors.gray2)
+    expect(titleStyle.color).toEqual(lightTheme.colors.gray2)
   })
 
   describe('when button is loading', () => {

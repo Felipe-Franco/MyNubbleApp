@@ -4,8 +4,8 @@ import { createTheme } from '@shopify/restyle'
 
 import { colors } from './colors'
 
-export const theme = createTheme({
-  colors: colors.darkTheme,
+export const lightTheme = createTheme({
+  colors: colors.lightTheme,
   spacing: {
     s0: 0,
     s4: 4,
@@ -31,6 +31,11 @@ export const theme = createTheme({
   },
 })
 
+export const darkTheme = {
+  ...lightTheme,
+  colors: colors.darkTheme,
+}
+
 export const $shadowStyle: ViewStyle = {
   elevation: 10,
   shadowColor: '#000',
@@ -42,5 +47,6 @@ export const $shadowStyle: ViewStyle = {
   },
 }
 
-export type Theme = typeof theme
+export type Theme = typeof lightTheme
 export type ThemeColor = keyof Theme['colors']
+export type ColorSchemeName = 'light' | 'dark' | null | undefined

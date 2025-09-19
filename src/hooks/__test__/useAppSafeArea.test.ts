@@ -1,7 +1,7 @@
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { useAppSafeArea } from '@hooks'
-import { theme } from '@theme'
+import { lightTheme } from '@theme'
 
 import { renderHook } from 'test-utils'
 
@@ -17,8 +17,8 @@ describe('useAppSafeArea', () => {
     }))
 
     const { result } = renderHook(() => useAppSafeArea())
-    expect(result.current.top).toEqual(theme.spacing.s20)
-    expect(result.current.bottom).toEqual(theme.spacing.s20)
+    expect(result.current.top).toEqual(lightTheme.spacing.s20)
+    expect(result.current.bottom).toEqual(lightTheme.spacing.s20)
   })
 
   test('when the safe are is greater than de minimum requirement, it return the safe area', () => {

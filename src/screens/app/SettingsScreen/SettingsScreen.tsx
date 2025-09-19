@@ -6,11 +6,15 @@ import { MenuItem } from './components/MenuItem'
 
 type SettingsScreenProps = AppScreenProps<'SettingsScreen'>
 
-export function SettingsScreen({}: SettingsScreenProps) {
+export function SettingsScreen({ navigation }: SettingsScreenProps) {
   const { signOut } = useAuthSignOut()
 
   function handleSignOut() {
     signOut()
+  }
+
+  function navigateToDarkModeScreen() {
+    navigation.navigate('DarkModeScreen')
   }
 
   return (
@@ -21,7 +25,7 @@ export function SettingsScreen({}: SettingsScreenProps) {
       <MenuItem label='Política de privacidade' onPress={() => {}} />
       <Divider />
 
-      <MenuItem label='Modo escuro' onPress={() => {}} />
+      <MenuItem label='Modo escuro' onPress={navigateToDarkModeScreen} />
 
       <Button title='Sair da conta' onPress={handleSignOut} marginTop='s48' />
     </Screen>
