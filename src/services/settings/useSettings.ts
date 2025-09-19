@@ -13,7 +13,7 @@ const useSettingsStore = create<SettingsStore>()(
       themePreference: 'system',
 
       onSystemChange: (colorSchemeName) => {
-        const updatedAppTheme = settingsService.onSytemChange(
+        const updatedAppTheme = settingsService.onSystemChange(
           colorSchemeName,
           get().themePreference,
         )
