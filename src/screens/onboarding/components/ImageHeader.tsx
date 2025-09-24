@@ -1,4 +1,4 @@
-import { Dimensions, Image } from 'react-native'
+import { Dimensions, Image, StyleSheet } from 'react-native'
 
 import { useAppColorScheme } from '@services'
 
@@ -12,5 +12,12 @@ export function ImageHeader({ image }: ImageHeaderProps) {
   const appColor = useAppColorScheme()
   const imageSource = appColor === 'light' ? image.light : image.dark
 
-  return <Image source={imageSource} style={{ width: SCREEN_WIDTH }} />
+  return <Image source={imageSource} style={styles.image} />
 }
+
+const styles = StyleSheet.create({
+  image: {
+    width: SCREEN_WIDTH,
+    height: '90%',
+  },
+})

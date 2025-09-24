@@ -22,15 +22,19 @@ export function OnboardingPage({
   onPressSkip,
 }: OnboardingPageProps) {
   return (
-    <Box flex={1} width={SCREEN_WIDTH}>
-      <Box flex={4} backgroundColor='error'>
+    <Box flex={1} width={SCREEN_WIDTH} backgroundColor='background'>
+      <Box flex={4}>
         <ImageHeader image={pageItem.image} />
       </Box>
-      <Box flex={5} backgroundColor='carrotSecondary'>
-        <Content title={pageItem.title} subtitle={pageItem.subtitle} />
+      <Box flex={5} paddingHorizontal='s24'>
+        <Content {...pageItem} />
       </Box>
-      <Box flex={1} backgroundColor='success'>
-        <BottomMenu onPressNext={onPressNext} onPressSkip={onPressSkip} />
+      <Box flex={1} paddingHorizontal='s24'>
+        <BottomMenu
+          onPressNext={onPressNext}
+          onPressSkip={onPressSkip}
+          isLast={pageItem.isLast}
+        />
       </Box>
 
       <Box />

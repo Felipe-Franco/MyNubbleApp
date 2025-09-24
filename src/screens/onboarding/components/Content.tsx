@@ -1,15 +1,35 @@
 import { Box, Text } from '@components'
 
-type ContentProps = {
-  title: string
-  subtitle: string
-}
+import { OnboardingPageItem } from '../onboardingData'
 
-export function Content({ title, subtitle }: ContentProps) {
+import { ProgressIndicator } from './ProgressIndicator'
+
+type ContentProps = Omit<OnboardingPageItem, 'image'>
+
+export function Content({ title, subtitle, index, total }: ContentProps) {
   return (
     <Box>
-      <Text preset='headingLarge'>{title}</Text>
-      <Text preset='paragraphLarge'>{subtitle}</Text>
+      <ProgressIndicator
+        currentIndex={index}
+        total={total}
+        marginBottom='s24'
+      />
+      <Text>
+        {title.map((titleItem, _index) => (
+          <Text
+            key={_index}
+            preset='headingLarge'
+            color={
+              titleItem.highlight ? 'carrotSecondary' : 'backgroundContrast'
+            }
+          >
+            {titleItem.text}
+          </Text>
+        ))}
+      </Text>
+      <Text preset='paragraphLarge' marginTop='s16'>
+        {subtitle}
+      </Text>
     </Box>
   )
 }

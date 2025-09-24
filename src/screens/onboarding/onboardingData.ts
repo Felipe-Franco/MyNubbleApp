@@ -3,16 +3,27 @@ import { ImageProps } from 'react-native'
 import { images } from '@assets'
 
 export type OnboardingPageItem = {
-  title: string
+  title: Array<{ text: string; highlight: boolean }>
   subtitle: string
   image: {
     light: ImageProps['source']
     dark: ImageProps['source']
   }
+  index: number
+  total: number
+  isLast: boolean
 }
 
-const page1: OnboardingPageItem = {
-  title: 'Uma rede social de conexões reais',
+type OnboardingPageItemWithoutMeta = Omit<
+  OnboardingPageItem,
+  'index' | 'total' | 'isLast'
+>
+
+const page1: OnboardingPageItemWithoutMeta = {
+  title: [
+    { text: 'Uma rede social de', highlight: false },
+    { text: '\nconexões reais', highlight: true },
+  ],
   subtitle:
     'Fique por dentro do que acontece com as pessoas que você mais gosta',
   image: {
@@ -21,8 +32,12 @@ const page1: OnboardingPageItem = {
   },
 }
 
-const page2: OnboardingPageItem = {
-  title: 'Compartilhe suas histórias com seus amigos próximos',
+const page2: OnboardingPageItemWithoutMeta = {
+  title: [
+    { text: 'Compartilhe suas', highlight: false },
+    { text: '\nhistórias', highlight: true },
+    { text: ' com seus amigos próximos', highlight: false },
+  ],
   subtitle: 'Tenha sua linha do tempo personalizada',
   image: {
     light: images.onboardingLight2,
@@ -30,8 +45,11 @@ const page2: OnboardingPageItem = {
   },
 }
 
-const page3: OnboardingPageItem = {
-  title: 'Interaja em tempo real com as pessoas',
+const page3: OnboardingPageItemWithoutMeta = {
+  title: [
+    { text: 'Interaja', highlight: true },
+    { text: ' em tempo real com as pessoas', highlight: false },
+  ],
   subtitle: 'Curta, comente e favorite os conteúdos que você mais gostar',
   image: {
     light: images.onboardingLight3,
@@ -39,4 +57,11 @@ const page3: OnboardingPageItem = {
   },
 }
 
-export const onboardingPages: OnboardingPageItem[] = [page1, page2, page3]
+export const onboardingPages: OnboardingPageItem[] = [page1, page2, page3].map(
+  (item, index, array) => ({
+    ...item,
+    index,
+    total: array.length,
+    isLast: index === array.length - 1,
+  }),
+)

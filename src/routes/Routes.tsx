@@ -1,17 +1,21 @@
-import { NavigationContainer } from '@react-navigation/native'
+import { ReactElement } from 'react'
 
-import { useAuthCredentials } from '@services'
+import { NavigationContainer } from '@react-navigation/native'
 
 import { AppStack } from './AppStack'
 import { AuthStack } from './AuthStack'
+import { OnboardingStack } from './OnboardingStack'
+import { Stacks, useRouter } from './useRouter'
+
+const stacks: Record<Stacks, ReactElement> = {
+  App: <AppStack />,
+  Auth: <AuthStack />,
+  Onboarding: <OnboardingStack />,
+}
 
 export function Router() {
-  const { authCredentials } = useAuthCredentials()
-  const isSignedIn = !!authCredentials
+  const stack = useRouter()
+  const Stack = stacks[stack]
 
-  return (
-    <NavigationContainer>
-      {isSignedIn ? <AppStack /> : <AuthStack />}
-    </NavigationContainer>
-  )
+  return <NavigationContainer>{Stack}</NavigationContainer>
 }
