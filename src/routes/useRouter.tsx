@@ -1,10 +1,26 @@
-import { useAuthCredentials, useShowOnboarding } from '@services'
+import { useEffect } from 'react'
 
-export type Stacks = 'Auth' | 'App' | 'Onboarding'
+import {
+  settingsService,
+  useAuthCredentials,
+  useShowOnboarding,
+} from '@services'
+
+export type Stacks = 'Auth' | 'App' | 'Onboarding' | 'Loading'
 
 export function useRouter(): Stacks {
   const showOnboarding = useShowOnboarding()
-  const { authCredentials } = useAuthCredentials()
+  const { authCredentials, isLoading } = useAuthCredentials()
+
+  useEffect(() => {
+    if (!isLoading) {
+      settingsService.hideSplashScreen()
+    }
+  }, [isLoading])
+
+  if (isLoading) {
+    return 'Loading'
+  }
 
   if (showOnboarding) {
     return 'Onboarding'

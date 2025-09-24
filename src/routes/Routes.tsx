@@ -2,15 +2,31 @@ import { ReactElement } from 'react'
 
 import { NavigationContainer } from '@react-navigation/native'
 
+import { ActivityIndicator, Box } from '@components'
+
 import { AppStack } from './AppStack'
 import { AuthStack } from './AuthStack'
 import { OnboardingStack } from './OnboardingStack'
 import { Stacks, useRouter } from './useRouter'
 
+function LoadingScreen() {
+  return (
+    <Box
+      flex={1}
+      backgroundColor='background'
+      justifyContent='center'
+      alignItems='center'
+    >
+      <ActivityIndicator size='large' />
+    </Box>
+  )
+}
+
 const stacks: Record<Stacks, ReactElement> = {
   App: <AppStack />,
   Auth: <AuthStack />,
   Onboarding: <OnboardingStack />,
+  Loading: <LoadingScreen />,
 }
 
 export function Router() {

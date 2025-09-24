@@ -1,5 +1,10 @@
 import { Appearance, Platform, StatusBar } from 'react-native'
 
+import {
+  hide as hideBootSplash,
+  isVisible as isVisibleBootSplash,
+} from 'react-native-bootsplash'
+
 import { colors, ColorSchemeName } from '@theme'
 
 import { AppColorScheme, ThemePreference } from './settingsTypes'
@@ -40,8 +45,21 @@ function handleStatusBar(appColorScheme: AppColorScheme) {
   }
 }
 
+async function hideSplashScreen() {
+  try {
+    const visible = await isVisibleBootSplash()
+
+    if (visible) {
+      hideBootSplash({ fade: true })
+    }
+  } finally {
+    hideBootSplash()
+  }
+}
+
 export const settingsService = {
   onThemePreferenceChange,
   onSystemChange,
   handleStatusBar,
+  hideSplashScreen,
 }
