@@ -31,7 +31,7 @@ export function Screen({
 }: ScreenProps) {
   const { top, bottom } = useAppSafeArea()
   const { colors } = useAppTheme()
-  const keyboardBehavior = Platform.OS === 'ios' ? 'padding' : 'height'
+  const keyboardBehavior = Platform.OS === 'ios' ? 'padding' : undefined
   const Container = scrollable ? ScrollViewContainer : ViewContainer
 
   return (

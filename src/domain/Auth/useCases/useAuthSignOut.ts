@@ -28,6 +28,6 @@ export function useAuthSignOut(options?: MutationOptions<void>) {
   return {
     signOut,
     error,
-    isPending,
+    isLoading: isPending,
   }
 }

@@ -1,23 +1,51 @@
-import { Image, ListRenderItemInfo, StyleSheet } from 'react-native'
+import { Dimensions, ListRenderItemInfo, StyleSheet } from 'react-native'
 
 import { InfinityScrollList, Screen } from '@components'
 import { PostReaction, postReactionService } from '@domain'
 import { QueryKeys } from '@infra'
 import { AppTabScreenProps } from '@routes'
 
+import { FavoriteItem } from './components/FavoriteItem'
+
 type FavoritesScreenProps = AppTabScreenProps<'FavoritesScreen'>
 
-export function FavoritesScreen({}: FavoritesScreenProps) {
+const NUM_COLUMNS = 2
+const SCREEN_WIDTH = Dimensions.get('screen').width
+const HORIZONTAL_PADDING = 24
+const ITEM_MARGIN = 16
+const TOTAL_ITEM_MARGIN = (NUM_COLUMNS - 1) * ITEM_MARGIN
+
+const ITEM_WIDTH =
+  (SCREEN_WIDTH - TOTAL_ITEM_MARGIN - HORIZONTAL_PADDING * 2) / NUM_COLUMNS
+
+export function FavoritesScreen({ navigation }: FavoritesScreenProps) {
   function renderItem({ item }: ListRenderItemInfo<PostReaction>) {
-    return <Image source={{ uri: item.post.imageURL }} style={styles.image} />
+    return (
+      <FavoriteItem
+        postReaction={item}
+        itemWidth={ITEM_WIDTH}
+        onPress={() =>
+          navigation.navigate('PostCommentScreen', {
+            postId: item.postId,
+            postAuthorId: item.author.id,
+          })
+        }
+      />
+    )
   }
 
   return (
-    <Screen style={styles.screenContainer}>
+    <Screen title='Favoritos' style={styles.screenContainer}>
       <InfinityScrollList
         renderItem={renderItem}
         queryKey={QueryKeys.FavoriteList}
         getList={(page) => postReactionService.getMyReactions('like', page)}
+        numColumns={NUM_COLUMNS}
+        columnWrapperStyle={{ columnGap: ITEM_MARGIN }}
+        contentContainerStyle={{
+          rowGap: ITEM_MARGIN,
+          paddingBottom: ITEM_MARGIN,
+        }}
         emptyMessage='Você ainda não favoritou nenhum item'
         errorMessage='Não foi possível carregar seus favoritor 😢😢😢'
       />
@@ -27,13 +55,7 @@ export function FavoritesScreen({}: FavoritesScreenProps) {
 
 const styles = StyleSheet.create({
   screenContainer: {
-    paddingBottom: 0,
-    paddingHorizontal: 0,
-    paddingTop: 0,
     flex: 1,
-  },
-  image: {
-    width: 300,
-    height: 300,
+    paddingBottom: 0,
   },
 })

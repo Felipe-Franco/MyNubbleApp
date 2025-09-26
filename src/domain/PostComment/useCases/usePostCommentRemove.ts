@@ -39,7 +39,7 @@ export function usePostCommentRemove(
 
   return {
     removePostComment: mutate,
-    isPending,
+    isLoading: isPending,
     error,
   }
 }

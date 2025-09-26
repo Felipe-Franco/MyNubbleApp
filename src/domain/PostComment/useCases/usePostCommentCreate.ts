@@ -43,7 +43,7 @@ export function usePostCommentCreate(
 
   return {
     createPostComment,
-    isPending,
+    isLoading: isPending,
     error,
   }
 }

@@ -1,7 +1,7 @@
 import { FlatList, ListRenderItemInfo, StyleSheet } from 'react-native'
 
-import { Screen } from '@components'
-import { PostComment, usePostCommentList } from '@domain'
+import { PostItem, Screen } from '@components'
+import { PostComment, usePostCommentList, usePostGetById } from '@domain'
 import { useAppSafeArea } from '@hooks'
 import { AppScreenProps } from '@routes'
 import { useAuthCredentials } from '@services'
@@ -22,6 +22,8 @@ export function PostCommentScreen({ route }: PostCommentScreenProps) {
     hasNextPage,
     fetchNextPage,
   } = usePostCommentList(postId)
+
+  const { post } = usePostGetById(postId)
 
   function renderItem({ item }: ListRenderItemInfo<PostComment>) {
     return (
@@ -46,6 +48,7 @@ export function PostCommentScreen({ route }: PostCommentScreenProps) {
         keyExtractor={keyExtractor}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: bottom }}
+        ListHeaderComponent={post && <PostItem post={post} />}
         ListFooterComponent={
           <PostCommentBottom
             onPress={fetchNextPage}

@@ -4,6 +4,7 @@ export enum QueryKeys {
   FavoriteList = 'FavoriteList',
 
   GetPostList = 'GetPostList',
+  GetPostById = 'GetPostById',
 
   GetUserById = 'GetUserById',
   GetUserList = 'GetUserList',

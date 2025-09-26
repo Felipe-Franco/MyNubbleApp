@@ -1,17 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { userService } from '@domain'
 import { QueryKeys } from '@infra'
 
-export function useUserGetById(userId: number) {
+import { postService } from '../postService'
+
+export function usePostGetById(postId: number) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: [QueryKeys.GetUserById, userId],
-    queryFn: () => userService.getById(userId),
+    queryKey: [QueryKeys.GetPostById, postId],
+    queryFn: () => postService.getById(postId),
     staleTime: 1000 * 30, // 30 seconds
   })
 
   return {
-    user: data,
+    post: data,
     isLoading,
     isError,
   }
