@@ -28,6 +28,8 @@ export function FavoritesScreen({ navigation }: FavoritesScreenProps) {
           navigation.navigate('PostCommentScreen', {
             postId: item.postId,
             postAuthorId: item.author.id,
+            title: 'Post',
+            showPost: true,
           })
         }
       />

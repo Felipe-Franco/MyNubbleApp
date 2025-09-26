@@ -4,12 +4,15 @@ import { Post } from '@domain'
 type PostActionsProps = Pick<
   Post,
   'commentCount' | 'favoriteCount' | 'reactionCount'
->
+> & {
+  hideCommentAction: boolean
+}
 
 export function PostActions({
   favoriteCount,
   reactionCount,
   commentCount,
+  hideCommentAction,
 }: PostActionsProps) {
   return (
     <Box flexDirection='row' marginTop='s16'>
@@ -19,12 +22,15 @@ export function PostActions({
         onPress={() => {}}
         count={reactionCount}
       />
+
       <ActionItem
         iconName='comment'
         iconColor='backgroundContrast'
         onPress={() => {}}
         count={commentCount}
+        disabled={hideCommentAction}
       />
+
       <ActionItem
         iconName='bookmark'
         iconColor='backgroundContrast'
@@ -40,11 +46,19 @@ interface ActionItemProps {
   iconColor: IconProps['color']
   onPress: () => void
   count: number
+  disabled?: boolean
 }
 
-function ActionItem({ iconName, count, iconColor, onPress }: ActionItemProps) {
+function ActionItem({
+  iconName,
+  count,
+  iconColor,
+  onPress,
+  disabled,
+}: ActionItemProps) {
   return (
     <TouchableOpacityBox
+      disabled={disabled}
       flexDirection='row'
       alignItems='center'
       marginRight='s24'

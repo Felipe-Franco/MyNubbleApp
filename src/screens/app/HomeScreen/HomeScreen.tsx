@@ -9,14 +9,10 @@ import { HomeHeader } from './components/HomeHeader'
 
 type HomeScreenProps = AppTabScreenProps<'HomeScreen'>
 
-let count = 0
-
 export function HomeScreen({}: HomeScreenProps) {
   function renderItem({ item }: ListRenderItemInfo<Post>) {
     return <PostItem post={item} />
   }
-
-  console.log(`Home Screen renderizou: ${++count}`)
 
   return (
     <Screen style={styles.screenContainer}>

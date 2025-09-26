@@ -1,6 +1,6 @@
-import { FlatList, ListRenderItemInfo, StyleSheet } from 'react-native'
+import { FlatList, ListRenderItemInfo } from 'react-native'
 
-import { PostItem, Screen } from '@components'
+import { Box, PostItem, Screen } from '@components'
 import { PostComment, usePostCommentList, usePostGetById } from '@domain'
 import { useAppSafeArea } from '@hooks'
 import { AppScreenProps } from '@routes'
@@ -13,7 +13,7 @@ import { PostCommentTextMessage } from './components/PostCommentTextMessage'
 type PostCommentScreenProps = AppScreenProps<'PostCommentScreen'>
 
 export function PostCommentScreen({ route }: PostCommentScreenProps) {
-  const { postId, postAuthorId } = route.params
+  const { postId, postAuthorId, title, showPost = false } = route.params
   const { bottom } = useAppSafeArea()
   const { userId } = useAuthCredentials()
 
@@ -23,16 +23,18 @@ export function PostCommentScreen({ route }: PostCommentScreenProps) {
     fetchNextPage,
   } = usePostCommentList(postId)
 
-  const { post } = usePostGetById(postId)
+  const { post } = usePostGetById(postId, showPost)
 
   function renderItem({ item }: ListRenderItemInfo<PostComment>) {
     return (
-      <PostCommentItem
-        postId={postId}
-        postComment={item}
-        postAuthorId={postAuthorId}
-        userId={userId}
-      />
+      <Box paddingHorizontal='s24'>
+        <PostCommentItem
+          postId={postId}
+          postComment={item}
+          postAuthorId={postAuthorId}
+          userId={userId}
+        />
+      </Box>
     )
   }
 
@@ -41,14 +43,18 @@ export function PostCommentScreen({ route }: PostCommentScreenProps) {
   }
 
   return (
-    <Screen canGoBack={true} title='Comentários' style={styles.screenContainer}>
+    <Screen canGoBack={true} title={title} flex={1} noPaddingHorizontal={true}>
       <FlatList
         data={postCommentList}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: bottom }}
-        ListHeaderComponent={post && <PostItem post={post} />}
+        ListHeaderComponent={
+          showPost && !!post ? (
+            <PostItem post={post} hideCommentActions={showPost} />
+          ) : null
+        }
         ListFooterComponent={
           <PostCommentBottom
             onPress={fetchNextPage}
@@ -57,16 +63,9 @@ export function PostCommentScreen({ route }: PostCommentScreenProps) {
         }
       />
 
-      <PostCommentTextMessage postId={postId} />
+      <Box paddingHorizontal='s24'>
+        <PostCommentTextMessage postId={postId} />
+      </Box>
     </Screen>
   )
 }
-
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-  },
-  flexContainer: {
-    flex: 1,
-  },
-})

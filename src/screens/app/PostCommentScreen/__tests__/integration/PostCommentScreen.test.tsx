@@ -41,6 +41,7 @@ describe('integration: <PostCommentScreen />', () => {
           params: {
             postId: 1,
             postAuthorId: 1,
+            title: 'Comentários',
           },
         }}
       />,
@@ -85,6 +86,7 @@ describe('integration: <PostCommentScreen />', () => {
           params: {
             postId: 1,
             postAuthorId: 1,
+            title: 'Comentários',
           },
         }}
       />,

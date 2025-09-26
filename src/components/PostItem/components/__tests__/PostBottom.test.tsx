@@ -9,7 +9,7 @@ import { PostBottom } from '../PostBottom'
 import { mockedPost } from './mockedData/mockedPost'
 
 function renderComponent(post: Post) {
-  render(<PostBottom {...post} />)
+  render(<PostBottom {...post} hideCommentActions={false} />)
 }
 
 const mockedNavigate = jest.fn()
@@ -59,6 +59,7 @@ describe('<PostBottom>', () => {
     expect(mockedNavigate).toHaveBeenCalledWith('PostCommentScreen', {
       postId: mockedPost.id,
       postAuthorId: mockedPost.author.id,
+      title: 'Comentários',
     })
   })
 })

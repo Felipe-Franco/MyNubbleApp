@@ -9,9 +9,10 @@ import { PostImage } from './components/PostImage'
 
 interface PostItemProps {
   post: Post
+  hideCommentActions?: boolean
 }
 
-export function PostItem({ post }: PostItemProps) {
+export function PostItem({ post, hideCommentActions = false }: PostItemProps) {
   return (
     <Box marginBottom='s24' paddingHorizontal='s24'>
       <ProfileUser user={post.author} />
@@ -20,12 +21,14 @@ export function PostItem({ post }: PostItemProps) {
         commentCount={post.commentCount}
         favoriteCount={post.favoriteCount}
         reactionCount={post.reactionCount}
+        hideCommentAction={hideCommentActions}
       />
       <PostBottom
         author={post.author}
         commentCount={post.commentCount}
         text={post.text}
         id={post.id}
+        hideCommentActions={hideCommentActions}
       />
     </Box>
   )
