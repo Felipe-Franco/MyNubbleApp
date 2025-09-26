@@ -1,63 +1,32 @@
-import { useRef } from 'react'
-import {
-  FlatList,
-  ListRenderItemInfo,
-  RefreshControl,
-  StyleSheet,
-} from 'react-native'
+import { ListRenderItemInfo, StyleSheet } from 'react-native'
 
-import { useScrollToTop } from '@react-navigation/native'
-
-import { PostItem, Screen } from '@components'
-import { Post, usePostList } from '@domain'
+import { InfinityScrollList, PostItem, Screen } from '@components'
+import { Post, postService } from '@domain'
+import { QueryKeys } from '@infra'
 import { AppTabScreenProps } from '@routes'
 
-import { HomeEmpty } from './components/HomeEmpty'
 import { HomeHeader } from './components/HomeHeader'
 
 type HomeScreenProps = AppTabScreenProps<'HomeScreen'>
 
+let count = 0
+
 export function HomeScreen({}: HomeScreenProps) {
-  const flatListRef = useRef<FlatList>(null)
-  const {
-    list: postList,
-    isLoading,
-    isError,
-    refresh,
-    fetchNextPage,
-  } = usePostList()
-
-  useScrollToTop(flatListRef)
-
   function renderItem({ item }: ListRenderItemInfo<Post>) {
     return <PostItem post={item} />
   }
 
-  function keyExtractor(post: Post) {
-    return post.id.toString()
-  }
+  console.log(`Home Screen renderizou: ${++count}`)
 
   return (
     <Screen style={styles.screenContainer}>
-      <FlatList
-        ref={flatListRef}
-        data={postList}
+      <InfinityScrollList
         renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        showsVerticalScrollIndicator={false}
-        onEndReached={fetchNextPage}
-        onEndReachedThreshold={0.1}
-        refreshing={isLoading}
-        contentContainerStyle={[
-          postList.length === 0 ? styles.flexContainer : null,
-        ]}
-        refreshControl={
-          <RefreshControl refreshing={isLoading} onRefresh={refresh} />
-        }
+        queryKey={QueryKeys.GetPostList}
+        getList={postService.getList}
+        emptyMessage='Não há publicações no seu feed!'
+        errorMessage='Não foi possível carregar o feed 😢'
         ListHeaderComponent={HomeHeader}
-        ListEmptyComponent={
-          <HomeEmpty loading={isLoading} error={isError} refetch={refresh} />
-        }
       />
     </Screen>
   )
@@ -68,9 +37,6 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     paddingHorizontal: 0,
     paddingTop: 0,
-    flex: 1,
-  },
-  flexContainer: {
     flex: 1,
   },
 })
