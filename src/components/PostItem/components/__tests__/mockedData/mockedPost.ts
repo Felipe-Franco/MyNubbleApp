@@ -17,4 +17,5 @@ export const mockedPost: Post = {
     lastName: 'Julia',
     isOnline: false,
   },
+  reactions: [],
 }

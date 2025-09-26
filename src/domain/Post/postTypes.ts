@@ -1,4 +1,4 @@
-import { User, UserAPI } from '@domain'
+import { PostReaction, PostReactionAPI, User, UserAPI } from '@domain'
 
 export interface Post {
   id: number
@@ -8,6 +8,7 @@ export interface Post {
   reactionCount: number
   commentCount: number
   favoriteCount: number
+  reactions: Array<Pick<PostReaction, 'emojiType' | 'postId'>>
 }
 
 export interface PostAPI {
@@ -26,4 +27,5 @@ export interface PostAPI {
     favorite_count: string
     comments_count: string
   }
+  reactions: Array<Pick<PostReactionAPI, 'emoji_type' | 'post_id'>>
 }

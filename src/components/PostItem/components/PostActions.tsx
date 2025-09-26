@@ -1,33 +1,26 @@
 import { Box, Icon, IconProps, Text, TouchableOpacityBox } from '@components'
 import { Post } from '@domain'
 
-type PostActionsProps = Pick<
-  Post,
-  'commentCount' | 'favoriteCount' | 'reactionCount'
-> & {
+type PostActionsProps = {
+  post: Post
   hideCommentAction: boolean
 }
 
-export function PostActions({
-  favoriteCount,
-  reactionCount,
-  commentCount,
-  hideCommentAction,
-}: PostActionsProps) {
+export function PostActions({ post, hideCommentAction }: PostActionsProps) {
   return (
     <Box flexDirection='row' marginTop='s16'>
       <ActionItem
         iconName='heartFill'
         iconColor='marked'
         onPress={() => {}}
-        count={reactionCount}
+        count={post.reactionCount}
       />
 
       <ActionItem
         iconName='comment'
         iconColor='backgroundContrast'
         onPress={() => {}}
-        count={commentCount}
+        count={post.commentCount}
         disabled={hideCommentAction}
       />
 
@@ -35,7 +28,7 @@ export function PostActions({
         iconName='bookmark'
         iconColor='backgroundContrast'
         onPress={() => {}}
-        count={favoriteCount}
+        count={post.favoriteCount}
       />
     </Box>
   )

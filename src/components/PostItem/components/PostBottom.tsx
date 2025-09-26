@@ -3,24 +3,19 @@ import { useNavigation } from '@react-navigation/native'
 import { Box, Text } from '@components'
 import { Post } from '@domain'
 
-type PostBottomProps = Pick<Post, 'author' | 'text' | 'commentCount' | 'id'> & {
+type PostBottomProps = {
+  post: Post
   hideCommentActions: boolean
 }
 
-export function PostBottom({
-  author,
-  text,
-  commentCount,
-  id,
-  hideCommentActions,
-}: PostBottomProps) {
-  const commentText = getCommentText(commentCount)
+export function PostBottom({ post, hideCommentActions }: PostBottomProps) {
+  const commentText = getCommentText(post.commentCount)
   const navigation = useNavigation()
 
   function navigateToPostCommentScreen() {
     navigation.navigate('PostCommentScreen', {
-      postId: id,
-      postAuthorId: author.id,
+      postId: post.id,
+      postAuthorId: post.author.id,
       title: 'Comentários',
     })
   }
@@ -28,10 +23,10 @@ export function PostBottom({
   return (
     <Box marginTop='s16'>
       <Text preset='paragraphMedium' bold={true}>
-        {author.fullName}
+        {post.author.fullName}
       </Text>
       <Text preset='paragraphMedium' color='gray1'>
-        {text}
+        {post.text}
       </Text>
       {commentText && !hideCommentActions && (
         <Text

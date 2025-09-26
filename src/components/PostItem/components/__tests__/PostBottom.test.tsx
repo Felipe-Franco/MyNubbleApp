@@ -9,7 +9,7 @@ import { PostBottom } from '../PostBottom'
 import { mockedPost } from './mockedData/mockedPost'
 
 function renderComponent(post: Post) {
-  render(<PostBottom {...post} hideCommentActions={false} />)
+  render(<PostBottom post={post} hideCommentActions={false} />)
 }
 
 const mockedNavigate = jest.fn()

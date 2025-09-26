@@ -17,19 +17,8 @@ export function PostItem({ post, hideCommentActions = false }: PostItemProps) {
     <Box marginBottom='s24' paddingHorizontal='s24'>
       <ProfileUser user={post.author} />
       <PostImage imageURL={post.imageURL} />
-      <PostActions
-        commentCount={post.commentCount}
-        favoriteCount={post.favoriteCount}
-        reactionCount={post.reactionCount}
-        hideCommentAction={hideCommentActions}
-      />
-      <PostBottom
-        author={post.author}
-        commentCount={post.commentCount}
-        text={post.text}
-        id={post.id}
-        hideCommentActions={hideCommentActions}
-      />
+      <PostActions post={post} hideCommentAction={hideCommentActions} />
+      <PostBottom post={post} hideCommentActions={hideCommentActions} />
     </Box>
   )
 }
