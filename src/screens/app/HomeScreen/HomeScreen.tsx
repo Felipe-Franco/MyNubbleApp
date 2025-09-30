@@ -2,7 +2,7 @@ import { ListRenderItemInfo, StyleSheet } from 'react-native'
 
 import { InfinityScrollList, PostItem, Screen } from '@components'
 import { Post, postService } from '@domain'
-import { QueryKeys } from '@infra'
+import { AppQueryKeys } from '@infra'
 import { AppTabScreenProps } from '@routes'
 
 import { HomeHeader } from './components/HomeHeader'
@@ -18,7 +18,7 @@ export function HomeScreen({}: HomeScreenProps) {
     <Screen style={styles.screenContainer}>
       <InfinityScrollList
         renderItem={renderItem}
-        queryKey={QueryKeys.GetPostList}
+        queryKey={AppQueryKeys.GetPostList}
         getList={postService.getList}
         emptyMessage='Não há publicações no seu feed!'
         errorMessage='Não foi possível carregar o feed 😢'

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { PostComment, postCommentService } from '@domain'
-import { MutationOptions, QueryKeys } from '@infra'
+import { AppQueryKeys, MutationOptions } from '@infra'
 
 export function usePostCommentCreate(
   postId: number,
@@ -22,7 +22,7 @@ export function usePostCommentCreate(
 
     onSuccess: (postComment) => {
       queryClient.invalidateQueries({
-        queryKey: [QueryKeys.GetPostCommentList, postId],
+        queryKey: [AppQueryKeys.GetPostCommentList, postId],
       })
 
       if (options?.onSuccess) {

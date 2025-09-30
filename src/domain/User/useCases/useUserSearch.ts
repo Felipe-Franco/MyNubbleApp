@@ -1,9 +1,9 @@
 import { userService } from '@domain'
-import { QueryKeys, usePaginatedList } from '@infra'
+import { AppQueryKeys, usePaginatedList } from '@infra'
 
 export function useUserSearch(search: string) {
   return usePaginatedList(
-    [QueryKeys.GetUserList, search],
+    [AppQueryKeys.GetUserList, search],
     () => userService.searchUser(search),
     {
       enabled: search.length > 0,

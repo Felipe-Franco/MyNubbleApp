@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { Post } from '@domain'
-import { MutationOptions, QueryKeys } from '@infra'
+import { AppQueryKeys, MutationOptions } from '@infra'
 import { ImageForUpload, multimediaService } from '@services'
 
 import { postService } from '../postService'
@@ -17,7 +17,7 @@ export function usePostCreate(options?: MutationOptions<Post>) {
     mutationFn: ({ text, imageCover }) =>
       postService.createPost(text, imageCover),
     onSuccess: (post) => {
-      queryClient.invalidateQueries({ queryKey: [QueryKeys.GetPostList] })
+      queryClient.invalidateQueries({ queryKey: [AppQueryKeys.GetPostList] })
 
       if (options?.onSuccess) {
         options.onSuccess(post)

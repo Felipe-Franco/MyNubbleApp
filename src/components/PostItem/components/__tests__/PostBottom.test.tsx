@@ -59,7 +59,6 @@ describe('<PostBottom>', () => {
     expect(mockedNavigate).toHaveBeenCalledWith('PostCommentScreen', {
       postId: mockedPost.id,
       postAuthorId: mockedPost.author.id,
-      title: 'Comentários',
     })
   })
 })

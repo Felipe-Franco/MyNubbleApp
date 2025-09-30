@@ -8,7 +8,7 @@ import {
 
 import { useScrollToTop } from '@react-navigation/native'
 
-import { QueryKeys, usePaginatedList } from '@infra'
+import { AppQueryKeys, usePaginatedList } from '@infra'
 import { Page } from '@types'
 
 import { EmptyList } from './components/EmptyList'
@@ -16,7 +16,7 @@ import { EmptyList } from './components/EmptyList'
 type ItemTConstraints = { id: number | string }
 
 export type InfinityScrollListProps<ItemT extends ItemTConstraints> = {
-  queryKey: QueryKeys
+  queryKey: AppQueryKeys
   getList: (page: number) => Promise<Page<ItemT>>
   renderItem: FlatListProps<ItemT>['renderItem']
   emptyMessage?: string
@@ -62,7 +62,7 @@ export function InfinityScrollList<ItemT extends ItemTConstraints>({
           loading={isLoading}
           error={isError}
           refetch={refresh}
-          emptyMessage={emptyMessage}
+          emptyTitle={emptyMessage}
           errorMessage={errorMessage}
         />
       }

@@ -16,7 +16,6 @@ export function PostBottom({ post, hideCommentActions }: PostBottomProps) {
     navigation.navigate('PostCommentScreen', {
       postId: post.id,
       postAuthorId: post.author.id,
-      title: 'Comentários',
     })
   }
 

@@ -1,7 +1,7 @@
-export enum QueryKeys {
+export enum AppQueryKeys {
   GetPostCommentList = 'GetPostCommentList',
 
-  FavoriteList = 'FavoriteList',
+  GetFavoriteList = 'GetFavoriteList',
 
   GetPostList = 'GetPostList',
   GetPostById = 'GetPostById',

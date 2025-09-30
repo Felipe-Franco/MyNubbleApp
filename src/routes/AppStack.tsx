@@ -20,7 +20,7 @@ export type AppStackParamList = {
   PostCommentScreen: {
     postId: number
     postAuthorId: number
-    title: string
+    title?: string
     showPost?: boolean
   }
   ProfileScreen: {

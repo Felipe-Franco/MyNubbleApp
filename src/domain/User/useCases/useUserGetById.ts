@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { userService } from '@domain'
-import { QueryKeys } from '@infra'
+import { AppQueryKeys } from '@infra'
 
 export function useUserGetById(userId: number) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: [QueryKeys.GetUserById, userId],
+    queryKey: [AppQueryKeys.GetUserById, userId],
     queryFn: () => userService.getById(userId),
     staleTime: 1000 * 30, // 30 seconds
   })

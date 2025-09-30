@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { useInfiniteQuery } from '@tanstack/react-query'
 
-import { QueryKeys } from '@infra'
+import { AppQueryKeys } from '@infra'
 
 import { multimediaService } from './multimediaService'
 
@@ -10,7 +10,7 @@ export function useMultimediaGetPhotos(hasPermission: boolean) {
   const [photoList, setPhotoList] = useState<string[]>([])
 
   const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
-    queryKey: [QueryKeys.CameraRollList],
+    queryKey: [AppQueryKeys.CameraRollList],
     queryFn: ({ pageParam }) => multimediaService.getPhotos(pageParam),
     getNextPageParam: ({ cursor }) => cursor,
     initialPageParam: '',

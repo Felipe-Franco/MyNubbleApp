@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query'
 
 import { authService } from '@domain'
 import { useDebounce } from '@hooks'
-import { QueryKeys } from '@infra'
+import { AppQueryKeys } from '@infra'
 
 interface Params {
   value: string
   enabled: boolean
-  queryKey: QueryKeys
+  queryKey: AppQueryKeys
   isAvailableFunc: (value: string) => Promise<boolean>
 }
 
@@ -39,7 +39,7 @@ export function useAuthIsUsernameAvailable(username: string, enabled: boolean) {
   return useAuthIsFieldAvailable({
     value: username,
     enabled: enabled,
-    queryKey: QueryKeys.IsUsernameAvailable,
+    queryKey: AppQueryKeys.IsUsernameAvailable,
     isAvailableFunc: authService.isUserNameAvailable,
   })
 }
@@ -48,7 +48,7 @@ export function useAuthIsEmailAvailable(email: string, enabled: boolean) {
   return useAuthIsFieldAvailable({
     value: email,
     enabled: enabled,
-    queryKey: QueryKeys.IsEmailAvailable,
+    queryKey: AppQueryKeys.IsEmailAvailable,
     isAvailableFunc: authService.isEmailAvailable,
   })
 }

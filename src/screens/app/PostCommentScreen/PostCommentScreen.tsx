@@ -1,10 +1,12 @@
-import { FlatList, ListRenderItemInfo } from 'react-native'
+import { FlatList, ListRenderItemInfo, StyleSheet } from 'react-native'
 
 import { Box, PostItem, Screen } from '@components'
 import { PostComment, usePostCommentList, usePostGetById } from '@domain'
 import { useAppSafeArea } from '@hooks'
 import { AppScreenProps } from '@routes'
 import { useAuthCredentials } from '@services'
+
+import { EmptyList } from '../../../components/InfinityScrollList/components/EmptyList'
 
 import { PostCommentBottom } from './components/PostCommentBottom'
 import { PostCommentItem } from './components/PostCommentItem'
@@ -13,7 +15,12 @@ import { PostCommentTextMessage } from './components/PostCommentTextMessage'
 type PostCommentScreenProps = AppScreenProps<'PostCommentScreen'>
 
 export function PostCommentScreen({ route }: PostCommentScreenProps) {
-  const { postId, postAuthorId, title, showPost = false } = route.params
+  const {
+    postId,
+    postAuthorId,
+    title = 'Comentários',
+    showPost = false,
+  } = route.params
   const { bottom } = useAppSafeArea()
   const { userId } = useAuthCredentials()
 
@@ -21,6 +28,9 @@ export function PostCommentScreen({ route }: PostCommentScreenProps) {
     list: postCommentList,
     hasNextPage,
     fetchNextPage,
+    isLoading,
+    isError,
+    refresh,
   } = usePostCommentList(postId)
 
   const { post } = usePostGetById(postId, showPost)
@@ -49,7 +59,12 @@ export function PostCommentScreen({ route }: PostCommentScreenProps) {
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: bottom }}
+        contentContainerStyle={[
+          {
+            paddingBottom: bottom,
+          },
+          postCommentList.length === 0 ? styles.flexContainer : null,
+        ]}
         ListHeaderComponent={
           showPost && !!post ? (
             <PostItem post={post} hideCommentActions={showPost} />
@@ -61,6 +76,15 @@ export function PostCommentScreen({ route }: PostCommentScreenProps) {
             hasNextPage={hasNextPage}
           />
         }
+        ListEmptyComponent={
+          <EmptyList
+            emptyTitle='Esse post ainda não possui nenhum comentário'
+            errorMessage='Erro ao carregar os comentários'
+            loading={isLoading}
+            error={isError}
+            refetch={refresh}
+          />
+        }
       />
 
       <Box paddingHorizontal='s24'>
@@ -69,3 +93,9 @@ export function PostCommentScreen({ route }: PostCommentScreenProps) {
     </Screen>
   )
 }
+
+const styles = StyleSheet.create({
+  flexContainer: {
+    flex: 1,
+  },
+})

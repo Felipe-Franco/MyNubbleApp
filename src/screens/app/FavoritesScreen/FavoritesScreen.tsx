@@ -2,7 +2,7 @@ import { Dimensions, ListRenderItemInfo, StyleSheet } from 'react-native'
 
 import { InfinityScrollList, Screen } from '@components'
 import { PostReaction, postReactionService } from '@domain'
-import { QueryKeys } from '@infra'
+import { AppQueryKeys } from '@infra'
 import { AppTabScreenProps } from '@routes'
 
 import { FavoriteItem } from './components/FavoriteItem'
@@ -40,8 +40,8 @@ export function FavoritesScreen({ navigation }: FavoritesScreenProps) {
     <Screen title='Favoritos' style={styles.screenContainer}>
       <InfinityScrollList
         renderItem={renderItem}
-        queryKey={QueryKeys.FavoriteList}
-        getList={(page) => postReactionService.getMyReactions('like', page)}
+        queryKey={AppQueryKeys.GetFavoriteList}
+        getList={(page) => postReactionService.getMyReactions('favorite', page)}
         numColumns={NUM_COLUMNS}
         columnWrapperStyle={{ columnGap: ITEM_MARGIN }}
         contentContainerStyle={{
