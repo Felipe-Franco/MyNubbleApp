@@ -1,3 +1,3 @@
 export * from './appQueryKeys'
+export * from './hooks/useMutation'
 export * from './hooks/usePaginatedList'
-export * from './hooks/usetMutation'

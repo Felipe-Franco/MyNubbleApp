@@ -25,7 +25,7 @@ export function useMutation<TVariables, TData>(
       if (options?.onSuccess) {
         options.onSuccess(data)
       }
-    } catch (e) {
+    } catch {
       setError('Erro ao criar post')
 
       if (options?.onError) {

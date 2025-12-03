@@ -8,7 +8,7 @@ async function signIn(email: string, password: string) {
   try {
     const result = await authApi.signIn(email, password)
     return authAdapter.toAuthCredentials(result)
-  } catch (error) {
+  } catch {
     throw new Error('email ou senha inválidos')
   }
 }

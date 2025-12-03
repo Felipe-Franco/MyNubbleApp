@@ -41,7 +41,6 @@ export function AuthCredentialsProvider({ children }: PropsWithChildren) {
         authService.updateToken(tempAuthCredentials.token)
         setAuthCredentials(tempAuthCredentials)
       }
-    } catch (error) {
     } finally {
       setIsLoading(false)
     }

@@ -9,10 +9,11 @@ const toPost = (postAPI: PostAPI): Post => {
     reactionCount: parseInt(postAPI.meta.like_count, 10),
     favoriteCount: parseInt(postAPI.meta.favorite_count, 10),
     commentCount: parseInt(postAPI.meta.comments_count, 10),
-    reactions: postAPI.reactions.map((reaction) => ({
-      postId: reaction.post_id,
-      emojiType: reaction.emoji_type,
-    })),
+    reactions:
+      postAPI.reactions?.map((reaction) => ({
+        postId: reaction.post_id,
+        emojiType: reaction.emoji_type,
+      })) || [],
   }
 }
 
