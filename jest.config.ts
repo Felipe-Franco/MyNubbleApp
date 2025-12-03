@@ -7,7 +7,7 @@ const config: Config = {
   ],
   coveragePathIgnorePatterns: ['/node_modules/', 'index'],
   transformIgnorePatterns: [
-    'node_modules/(?!(@react-native|react-native|@react-navigation|react-native-safe-area-context)/)',
+    'node_modules/(?!(@react-native|react-native|@react-navigation|react-native-safe-area-context|until-async)/)',
   ],
   moduleDirectories: ['node_modules', './src/test'],
   modulePathIgnorePatterns: ['.*/mockedData/.*'],

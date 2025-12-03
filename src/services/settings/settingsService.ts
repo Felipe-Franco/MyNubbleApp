@@ -14,6 +14,10 @@ function onThemePreferenceChange(
 ): AppColorScheme {
   if (themePreference === 'system') {
     const colorScheme = Appearance.getColorScheme()
+    if (colorScheme === 'unspecified') {
+      return 'light'
+    }
+
     return colorScheme ? colorScheme : 'light'
   }
 
@@ -25,6 +29,10 @@ function onSystemChange(
   themePreference: ThemePreference,
 ): AppColorScheme | null {
   if (themePreference === 'system') {
+    if (color === 'unspecified') {
+      return 'light'
+    }
+
     return color ? color : 'light'
   }
 

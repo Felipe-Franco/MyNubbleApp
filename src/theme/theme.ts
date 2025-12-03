@@ -49,4 +49,9 @@ export const $shadowStyle: ViewStyle = {
 
 export type Theme = typeof lightTheme
 export type ThemeColor = keyof Theme['colors']
-export type ColorSchemeName = 'light' | 'dark' | null | undefined
+export type ColorSchemeName =
+  | 'light'
+  | 'dark'
+  | 'unspecified'
+  | null
+  | undefined
