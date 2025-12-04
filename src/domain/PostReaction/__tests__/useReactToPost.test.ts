@@ -10,7 +10,7 @@ import {
   mockedPostWithoutLike,
 } from './mockedData/mockedPost'
 
-describe('useReactToPost', () => {
+describe('useReactToPost test hook', () => {
   test('when react to post, hasReacted and reactionCount should be updated', async () => {
     jest
       .spyOn(postReactionService, 'reactToPost')
